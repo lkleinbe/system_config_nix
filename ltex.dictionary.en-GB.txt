@@ -1,4 +1,0 @@
-Neogen
-vimtex
-zathura
-nixvim
