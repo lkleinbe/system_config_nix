@@ -20,7 +20,7 @@
   services.openssh.settings.PasswordAuthentication =
     true; # NOTE uncomment this to allow SSH Password authentication
 
-  # Use the local private key of user for authentication in the gitlab
+  # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
     Host gitlab.com
     User git
