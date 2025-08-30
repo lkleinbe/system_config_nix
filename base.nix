@@ -18,9 +18,8 @@
   };
 
   # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelParams = [
     "intel_pstate=enable" # intel
@@ -96,6 +95,7 @@
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   environment.systemPackages = with pkgs; [
+    sbctl # this is needed for lanzaboote (secure boot)
     wget
     curl
     htop
@@ -110,13 +110,12 @@
     gnome-pomodoro
     vscode-extensions.vadimcn.vscode-lldb
     kitty
-
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
   environment.variables.GIT_ASKPASS = ""; # Disables GUI Password prompt for GIT
-  environment.variables.MESA_GL_VERSION_OVERRIDE =
-    "3.3"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
+  # environment.variables.MESA_GL_VERSION_OVERRIDE =
+  #   "3.3"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
   # environment.variables.MESA_GL_VERSION_OVERRIDE =
   #   "2.1"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
   programs.git = {

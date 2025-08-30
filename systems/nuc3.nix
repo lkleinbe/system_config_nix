@@ -2,9 +2,13 @@
   networking.hostName = "dumba-nuc3";
   system.stateVersion = "25.05";
 
-  # UEFI SUPPORT
-  boot.loader.grub.efiSupport = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # NOTE: Uncomment this if you want to use secure boot
+  # To use this you need to run before switching sudo sbctl create-keys
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 
   #User Configuration
   users.users.dumba = {
