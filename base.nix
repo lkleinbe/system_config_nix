@@ -124,6 +124,7 @@
     config = {
       core.editor = "nvim";
       pull.rebase = true;
+      push.autoSetupRemote = true;
     };
   };
   services.openssh = {
