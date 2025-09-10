@@ -13,17 +13,18 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     # user packages
     packages = with pkgs;
       [
         #  thunderbird
       ];
     openssh.authorizedKeys.keyFiles =
-      [ ../public_ssh_keys/work_laptop_ssh.pub ];
+      [ ../public_ssh_keys/home_windows_ssh.pub ];
   };
-  # services.openssh.settings.PasswordAuthentication =
-  #   true; # NOTE uncomment this to allow SSH Password authentication
+
+  services.openssh.settings.PasswordAuthentication =
+    false; # NOTE uncomment this to allow SSH Password authentication
 
   # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
@@ -36,7 +37,22 @@
   environment.systemPackages = lib.mkMerge [
     (with pkgs;
       [
+        docker-compose
         # htop
       ])
   ];
+
+  services.tailscale.enable = true;
+  services.tailscale.permitCertUid = "caddy";
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "gameserver.tail9f772.ts.net".extraConfig = ''
+        root * /var/www
+        file_server
+      '';
+    };
+  };
+  # networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+  virtualisation.docker.enable = true;
 }
