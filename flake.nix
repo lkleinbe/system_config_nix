@@ -25,6 +25,15 @@
           ./systems/home.nix
         ];
       };
+      gameserver = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixvim.nixosModules.nixvim
+          lanzaboote.nixosModules.lanzaboote
+          ./base.nix
+          ./systems/gameserver.nix
+        ];
+      };
       dumba-nuc1 = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
