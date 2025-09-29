@@ -81,9 +81,11 @@
       #  - settings: Override the default settings passed when initializing the server.
       #        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       servers = {
-        clangd = { enable = true; };
-        nixd = { enable = true; };
+        clangd.enable = true;
+        nixd.enable = true;
         cmake.enable = true;
+        pyright.enable = true;
+        tinymist.enable = true;
         ltex = {
           enable = true;
           settings.ltex.language = "en-GB";
@@ -91,38 +93,10 @@
           settings.additionalRules.motherTongue = "de-DE";
           # settings.completionEnabled = true;
         };
-
-        # gopls = {
-        #  enable = true;
-        #}
-        pyright = { enable = true; };
-        # rust_analyzer = {
-        #  enable = true;
-        #}
-        # ...etc. See `https://nix-community.github.io/nixvim/plugins/lsp` for a list of pre-configured LSPs
-        #
-        # Some languages (like typscript) have entire language plugins that can be useful:
-        #    `https://nix-community.github.io/nixvim/plugins/typescript-tools/index.html?highlight=typescript-tools#pluginstypescript-toolspackage`
-        #
-        # But for many setups the LSP (`tsserver`) will work just fine
-        # tsserver = {
-        #  enable = true;
-        #}
-
         lua_ls = {
           enable = true;
-
-          # cmd = {
-          #};
-          # filetypes = {
-          #};
           settings = {
-            completion = { callSnippet = "Replace"; };
-            #diagnostics = {
-            #  disable = [
-            #    "missing-fields"
-            #  ];
-            #};
+            completion.callSnippet = "Replace";
           };
         };
       };

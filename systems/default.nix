@@ -22,6 +22,7 @@
     openssh.authorizedKeys.keyFiles =
       [ ../public_ssh_keys/work_laptop_ssh.pub ];
   };
+
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
 

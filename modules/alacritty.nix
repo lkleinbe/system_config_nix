@@ -8,9 +8,9 @@
           term = "xterm-256color"
 
         [font]
-          normal = {family = "Jetbrains Mono Nerd Font", style = "Regular"}
-          bold = {family = "Jetbrains Mono Nerd Font", style = "Bold"}
-          italic = {family = "Jetbrains Mono Nerd Font", style = "Italic"}
+          normal = {family = "Jetbrains Mono Nerd Font", style = "SemiBold"}
+          bold = {family = "Jetbrains Mono Nerd Font", style = "ExtraBold"}
+          italic = {family = "Jetbrains Mono Nerd Font", style = "SemiBold Italic"}
           size = 10
 
         [colors.primary]

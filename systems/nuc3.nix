@@ -4,11 +4,11 @@
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use this you need to run before switching sudo sbctl create-keys
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
+  # boot.loader.systemd-boot.enable = lib.mkForce false;
+  # boot.lanzaboote = {
+  #   enable = true;
+  #   pkiBundle = "/var/lib/sbctl";
+  # };
 
   #User Configuration
   users.users.dumba = {
@@ -23,6 +23,7 @@
     openssh.authorizedKeys.keyFiles =
       [ ../public_ssh_keys/work_laptop_ssh.pub ];
   };
+
   # services.openssh.settings.PasswordAuthentication = true;    #NOTE uncomment this to allow SSH Password authentication
 
   # Use the local private key of user for authentication in the gitlab for this system flake

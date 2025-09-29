@@ -28,12 +28,6 @@
   ];
   powerManagement.cpuFreqGovernor = "performance";
 
-  # Disable PC Sleep
-  # systemd.targets.sleep.enable = false;
-  # systemd.targets.suspend.enable = false;
-  # systemd.targets.hibernate.enable = false;
-  # systemd.targets.hybrid-sleep.enable = false;
-
   services.resolved.enable = true;
   networking.networkmanager.enable = true;
   systemd.services."NetworkManager-wait-online".enable = false;
@@ -59,7 +53,10 @@
 
   # X11 windowing system & Gnome
   services.xserver.enable = true;
-  services.displayManager.ly.enable = true;
+  services.displayManager.ly = {
+    enable = true;
+    settings.numlock = true;
+  };
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.displayManager.gdm.autoSuspend = false;
   services.xserver.desktopManager.gnome.enable = true;

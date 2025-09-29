@@ -43,6 +43,9 @@
     enable = true;
     defaultEditor = true;
 
+    # colorschemes.kanagawa.enable = true;
+    # colorschemes.kanagawa.settings.terminalColors = true;
+
     colorschemes.onedark.enable = true;
     colorschemes.onedark.settings = {
       style = "darker";
@@ -204,6 +207,27 @@
         action = "$";
         options.desc = "Move to last character in line";
       }
+      {
+        mode = ["n" "v"];
+        key = "<S-j>";
+        action = "<C-f>";
+        options.desc = "Move one screen down";
+        options.noremap = true;
+      }
+      {
+        mode = ["n" "v"];
+        key = "<S-k>";
+        action = "<C-b>";
+        options.desc = "Move one screen up";
+        options.noremap = true;
+      }
+      {
+        mode = ["n" "v"];
+        key = "<C-j>";
+        action = "J";
+        options.desc = "Join lines";
+        options.noremap = true;
+      }
     ];
 
     # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
@@ -234,17 +258,9 @@
 
       # Detect tabstop and shiftwidth automatically
       # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
-      sleuth = { enable = true; };
-      # auto-save.enable = true;
-      # https://nix-community.github.io/nixvim/plugins/todo-comments/index.html
-      # smear-cursor = {
-      #   enable = true;
-      #   settings = {
-      #     stiffness = 0.8;
-      #     trailing_stiffness = 0.5;
-      #     distance_stop_animating = 0.5;
-      #   };
-      # };
+      sleuth.enable = true;
+      typst-preview.enable = true;
+      typst-vim.enable = true;
     };
 
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
