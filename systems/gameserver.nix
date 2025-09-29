@@ -35,11 +35,13 @@
 
   # system packages
   environment.systemPackages = lib.mkMerge [
-    (with pkgs;
-      [
-        docker-compose
-        # htop
-      ])
+    (with pkgs; [
+      docker-compose
+      hugo
+      jdk8
+      gradle
+      # htop
+    ])
   ];
 
   services.tailscale.enable = true;
@@ -49,7 +51,7 @@
     virtualHosts = {
       "gameserver.tail9f772.ts.net".extraConfig = ''
         root * /var/www
-        file_server
+        file_server browse
       '';
     };
   };
