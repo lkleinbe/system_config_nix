@@ -31,6 +31,8 @@
   services.resolved.enable = true;
   networking.networkmanager.enable = true;
   systemd.services."NetworkManager-wait-online".enable = false;
+  networking.networkmanager.dns = "systemd-resolved";
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Time Zone
@@ -53,12 +55,12 @@
 
   # X11 windowing system & Gnome
   services.xserver.enable = true;
-  services.displayManager.ly = {
-    enable = true;
-    settings.numlock = true;
-  };
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.autoSuspend = false;
+  # services.displayManager.ly = {
+  #   enable = true;
+  #   settings.numlock = true;
+  # };
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.autoSuspend = false;
   services.xserver.desktopManager.gnome.enable = true;
 
   # X11 keymap
