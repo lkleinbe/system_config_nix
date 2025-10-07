@@ -332,6 +332,7 @@
         };
         "org/gnome/settings-daemon/plugins/power" = {
           "sleep-inactive-ac-type" = "nothing";
+          "sleep-inactive-ac-timeout" = "0:i";
         };
         # Define the custom keybinding itself
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
