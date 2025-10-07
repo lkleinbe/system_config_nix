@@ -342,6 +342,9 @@
             name = "alacritty terminal";
           };
         "org/gnome/desktop/wm/keybindings" = { toggle-fullscreen = [ "F11" ]; };
+        "org/gnome/settings_daemon/plugins/power" = {
+          power-profile = "performance";
+        };
       };
     }];
   };
