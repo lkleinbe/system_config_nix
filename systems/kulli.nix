@@ -11,7 +11,6 @@
   # 4. run sudo sbctl enroll-keys --microsoft
   # 5. reboot again
   # 6. (you can use bootctl and sbctl status to check the secure boot status)
-
   boot.loader.systemd-boot.enable = false;
   boot.lanzaboote = {
     enable = true;

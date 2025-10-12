@@ -43,8 +43,10 @@
   '';
 
   # system packages
-  environment.systemPackages = with pkgs;
-    [
-      # htop
-    ];
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs;
+      [
+        # htop
+      ])
+  ];
 }

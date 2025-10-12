@@ -43,11 +43,8 @@
   '';
 
   # system packages
-  environment.systemPackages = with pkgs; [
-    docker-compose
-    hugo
-    jdk8
-    gradle
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [ docker-compose hugo jdk8 gradle ])
     # htop
   ];
 
