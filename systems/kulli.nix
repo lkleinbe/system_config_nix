@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
-  networking.hostName = "dumba-nuc3";
+  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop2.nix ];
+  networking.hostName = "kulli-home";
   system.stateVersion = "25.05";
 
   # NOTE: Uncomment this if you want to use secure boot
@@ -19,10 +19,10 @@
   };
 
   #User Configuration
-  users.users.dumba = {
+  users.users.kulli = {
     isNormalUser = true;
-    description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "kulli";
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     # user packages
     packages = with pkgs;
       [
@@ -32,18 +32,37 @@
       [ ../public_ssh_keys/work_laptop_ssh.pub ];
   };
 
-  # services.openssh.settings.PasswordAuthentication = true;    #NOTE uncomment this to allow SSH Password authentication
+  # services.openssh.settings.PasswordAuthentication =
+  #   true; # NOTE uncomment this to allow SSH Password authentication
 
   # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
     Host gitlab.com
     User git
-    IdentityFile /home/dumba/.ssh/id_ed25519
+    IdentityFile /home/kulli/.ssh/id_ed25519
   '';
 
+  #printing setup
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.gutenprint ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  #scanning setup
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
+
   # system packages
-  environment.systemPackages = with pkgs;
-    [
-      # htop
-    ];
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ thunderbird libreoffice ]) ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 }

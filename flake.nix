@@ -21,7 +21,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/home.nix
         ];
       };
@@ -30,7 +29,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/gameserver.nix
         ];
       };
@@ -39,7 +37,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/nuc1.nix
         ];
       };
@@ -48,7 +45,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/nuc2.nix
         ];
       };
@@ -57,7 +53,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/nuc3.nix
         ];
       };

@@ -1,39 +1,22 @@
-{ pkgs, inputs, ... }: {
-  environment.etc = {
-    "wallpapers/wallpaper.png" = {
-      source = ../wallpapers/wallpaper.png;
-      mode = "0644";
-    };
-    "wallpapers/wallpaper1.png" = {
-      source = ../wallpapers/wallpaper1.png;
-      mode = "0644";
-    };
-  };
+{ pkgs, inputs, lib, config, ... }: {
+  imports = [ ./dconf_base.nix ];
   programs.dconf = {
-
-    enable = true;
-    profiles.user.databases = [{
+    profiles.user.databases = lib.mkMerge [[{
       settings = {
-        # Enable the System Monitor extension
+        # "org/gnome/shell" = { enabled-extensions = [ "openbar@neuromorph" ]; };
         "org/gnome/shell" = {
           enabled-extensions = [
             "pomodoro@arun.codito.in"
-            "system-monitor@gnome-shell-extensions.gcampax.github.com"
-            "openbar@neuromorph"
             "mediacontrols@cliffniff.github.com"
+            "openbar@neuromorph"
           ];
         };
-        # dark theme
-        "org/gnome/desktop/interface" = { "color-scheme" = "prefer-dark"; };
-        # wallpaper configuration
+        #Wallpaper
         "org/gnome/desktop/background" = {
           "picture-options" = "zoom";
           #NOTE: BGURI in openbar conf also links to wallpaper
           "picture-uri" = "/etc/wallpapers/wallpaper1.png";
           "picture-uri-dark" = "/etc/wallpapers/wallpaper1.png";
-        };
-        "org/gnome/shell/extensions/mediacontrols" = {
-          "scroll-labels" = false;
         };
         # openbar configuration
         "org/gnome/shell/extensions/openbar" = {
@@ -320,32 +303,8 @@
           "wmax-hbarhint" = false;
           "wmaxbar" = true;
         };
-        # Enable minimize and maximize Buttons
-        "org/gnome/desktop/wm/preferences" = {
-          "button-layout" = "appmenu:minimize,maximize,close";
-        };
-        # Add custom keybinding paths
-        "org/gnome/settings-daemon/plugins/media-keys" = {
-          "custom-keybindings" = [
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-          ];
-        };
-        "org/gnome/settings-daemon/plugins/power" = {
-          "sleep-inactive-ac-type" = "nothing";
-          "sleep-inactive-ac-timeout" = "0:i";
-        };
-        # Define the custom keybinding itself
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-          {
-            binding = "<Ctrl><Alt>t";
-            command = "alacritty";
-            name = "alacritty terminal";
-          };
-        "org/gnome/desktop/wm/keybindings" = { toggle-fullscreen = [ "F11" ]; };
-        "org/gnome/settings_daemon/plugins/power" = {
-          power-profile = "performance";
-        };
       };
-    }];
+    }]];
   };
+
 }

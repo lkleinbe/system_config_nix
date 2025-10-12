@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }: {
+  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
   networking.hostName = "dumba-home";
   system.stateVersion = "25.05";
 

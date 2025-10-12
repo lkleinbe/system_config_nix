@@ -1,10 +1,9 @@
 { pkgs, nixvim, lib, ... }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ./modules/nixvim.nix
-    ./modules/dconf.nix
-    ./modules/alacritty.nix
-    ./modules/tmux.nix
+    ./nixvim.nix
+    ./alacritty.nix
+    ./tmux.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = {
@@ -112,8 +111,9 @@
     python313
     gnomeExtensions.open-bar
     gnomeExtensions.media-controls
-    zathura
+    gnomeExtensions.dash-to-panel
     gnome-pomodoro
+    zathura
     vscode-extensions.vadimcn.vscode-lldb
     kitty
   ];
@@ -137,5 +137,8 @@
     enable = true;
     settings.UseDns = true;
     settings.PasswordAuthentication = lib.mkDefault false;
+  };
+  xdg.mime.defaultApplications = {
+    "text/plain" = "org.gnome.TextEditor.desktop";
   };
 }

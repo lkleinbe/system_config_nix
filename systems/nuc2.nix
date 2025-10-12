@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }: {
+  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
   networking.hostName = "dumba-nuc2";
   system.stateVersion = "25.05";
 
@@ -41,10 +42,8 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs;
-      [
-        # htop
-      ])
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      # htop
+    ];
 }
