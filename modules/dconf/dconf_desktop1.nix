@@ -313,10 +313,6 @@
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
           ];
         };
-        "org/gnome/settings-daemon/plugins/power" = {
-          "sleep-inactive-ac-type" = "nothing";
-          "sleep-inactive-ac-timeout" = "0:i";
-        };
         # Define the custom keybinding itself
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
           {
@@ -325,9 +321,6 @@
             name = "alacritty terminal";
           };
         "org/gnome/desktop/wm/keybindings" = { toggle-fullscreen = [ "F11" ]; };
-        "org/gnome/settings_daemon/plugins/power" = {
-          power-profile = "performance";
-        };
       };
     }]];
   };
