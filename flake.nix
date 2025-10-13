@@ -9,7 +9,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-25.05";
       # url = "github:nix-community/nixvim/nixos-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -21,7 +21,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/home.nix
         ];
       };
@@ -30,7 +29,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/gameserver.nix
         ];
       };
@@ -39,7 +37,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/nuc1.nix
         ];
       };
@@ -48,7 +45,6 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/nuc2.nix
         ];
       };
@@ -57,8 +53,15 @@
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote
-          ./base.nix
           ./systems/nuc3.nix
+        ];
+      };
+      kulli-home = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixvim.nixosModules.nixvim
+          lanzaboote.nixosModules.lanzaboote
+          ./systems/kulli.nix
         ];
       };
     };

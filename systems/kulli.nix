@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../modules/base.nix
-    ../modules/dconf/dconf_desktop1.nix
-    ../modules/elgato.nix
+    ../modules/dconf/dconf_desktop2.nix
+    ../modules/nas_samba_client.nix
   ];
-  networking.hostName = "dumba-home";
+  networking.hostName = "kulli-home";
   system.stateVersion = "25.05";
 
   # NOTE: Uncomment this if you want to use secure boot
@@ -22,18 +22,22 @@
     pkiBundle = "/var/lib/sbctl";
   };
 
+  i18n.defaultLocale = "de_DE.UTF-8";
+
   #User Configuration
-  users.users.dumba = {
+  users.users.kulli = {
     isNormalUser = true;
-    description = "dumba";
+    description = "kulli";
     extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     # user packages
     packages = with pkgs;
       [
         #  thunderbird
       ];
-    openssh.authorizedKeys.keyFiles =
-      [ ../public_ssh_keys/work_laptop_ssh.pub ];
+    openssh.authorizedKeys.keyFiles = [
+      ../public_ssh_keys/home_pc_ssh.pub
+      ../public_ssh_keys/home_windows_ssh.pub
+    ];
   };
 
   # services.openssh.settings.PasswordAuthentication =
@@ -43,7 +47,7 @@
   programs.ssh.extraConfig = ''
     Host gitlab.com
     User git
-    IdentityFile /home/dumba/.ssh/id_ed25519
+    IdentityFile /home/kulli/.ssh/id_ed25519
   '';
 
   #printing setup
@@ -62,13 +66,22 @@
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 
   # system packages
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs; [
-      typst
-      godot_4_4
-      discord
-      # htop
-    ])
-  ];
-
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ libreoffice cifs-utils ]) ];
+  programs.thunderbird = { enable = true; };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  xdg.mime.defaultApplications = {
+    "x-scheme-handler/mailto" = "userapp-Thunderbird-ESWFE3.desktop";
+    "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";
+    "x-scheme-handler/mid" = "userapp-Thunderbird-ESWFE3.desktop";
+    "application/pdf" = "org.gnome.Evince.desktop";
+  };
 }
