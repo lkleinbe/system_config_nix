@@ -8,13 +8,21 @@
   system.stateVersion = "25.05";
 
   # NOTE: Uncomment this if you want to use secure boot
-  # To use this you need to run before switching sudo sbctl create-keys
-  boot.loader.systemd-boot.enable = lib.mkForce false;
+  # To use secure boot there is a 5 step process:
+  # 1. run sudo sbctl create-keys
+  # 2. uncomment the code block below and rebuild-switch
+  # 3. reboot and with secure boot enabled in setup mode
+  # 4. run sudo sbctl enroll-keys --microsoft
+  # 5. reboot again
+  # 6. (you can use bootctl and sbctl status to check the secure boot status)
+
+  boot.loader.systemd-boot.enable = false;
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
 
+  #User Configuration
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
