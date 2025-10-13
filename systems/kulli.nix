@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop2.nix ];
+  imports = [
+    ../modules/base.nix
+    ../modules/dconf/dconf_desktop2.nix
+    ../modules/nas_samba_client.nix
+  ];
   networking.hostName = "kulli-home";
   system.stateVersion = "25.05";
 
@@ -12,11 +16,13 @@
   # 5. reboot again
   # 6. (you can use bootctl and sbctl status to check the secure boot status)
 
-  # boot.loader.systemd-boot.enable = false;
-  # boot.lanzaboote = {
-  #   enable = true;
-  #   pkiBundle = "/var/lib/sbctl";
-  # };
+  boot.loader.systemd-boot.enable = false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+
+  i18n.defaultLocale = "de_DE.UTF-8";
 
   #User Configuration
   users.users.kulli = {
@@ -28,8 +34,10 @@
       [
         #  thunderbird
       ];
-    openssh.authorizedKeys.keyFiles =
-      [ ../public_ssh_keys/work_laptop_ssh.pub ];
+    openssh.authorizedKeys.keyFiles = [
+      ../public_ssh_keys/home_pc_ssh.pub
+      ../public_ssh_keys/home_windows_ssh.pub
+    ];
   };
 
   # services.openssh.settings.PasswordAuthentication =
@@ -59,10 +67,17 @@
 
   # system packages
   environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ thunderbird libreoffice ]) ];
+    lib.mkMerge [ (with pkgs; [ libreoffice cifs-utils ]) ];
+  programs.thunderbird = { enable = true; };
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+  };
+  xdg.mime.defaultApplications = {
+    "x-scheme-handler/mailto" = "userapp-Thunderbird-ESWFE3.desktop";
+    "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";
+    "x-scheme-handler/mid" = "userapp-Thunderbird-ESWFE3.desktop";
+    "application/pdf" = "org.gnome.Evince.desktop";
   };
 }
