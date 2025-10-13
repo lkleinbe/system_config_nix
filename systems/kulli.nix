@@ -74,6 +74,10 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
   xdg.mime.defaultApplications = {
     "x-scheme-handler/mailto" = "userapp-Thunderbird-ESWFE3.desktop";
     "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";

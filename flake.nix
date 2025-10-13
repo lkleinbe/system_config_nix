@@ -9,7 +9,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-25.05";
       # url = "github:nix-community/nixvim/nixos-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
