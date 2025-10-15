@@ -21,18 +21,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelParams = [
-    "intel_pstate=enable" # intel
+    "intel_pstate=enable" # intel pstate driver to change gpu frequency
     "intel_idle_max_cstate=1" # intel
     "energy_perf_bias=performance"
     "processor.max_cstate=1" # amd
   ];
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
-  # services.power-profiles-daemon.enable = false;
-  # services.tlp = {
-  #   enable = true;
-  #   settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
-  # };
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
+  };
 
   services.resolved.enable = true;
   networking.networkmanager.enable = true;
@@ -77,7 +77,7 @@
   #console keymap
   console.keyMap = "de";
   # enable CUPS to print documents
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
