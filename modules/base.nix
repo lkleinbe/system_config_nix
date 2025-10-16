@@ -46,7 +46,7 @@
 
   # Internationalisation properties
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-
+  i18n.extraLocales = [ "de_DE.UTF-8/UTF-8" ];
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
     LC_IDENTIFICATION = "de_DE.UTF-8";
