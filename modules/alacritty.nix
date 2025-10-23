@@ -1,11 +1,18 @@
 { pkgs, inputs, lib, ... }: {
-  environment.systemPackages = lib.mkMerge [ (with pkgs; [ alacritty ]) ];
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ alacritty alacritty-theme ]) ];
   environment.variables.XCURSOR_THEME = "Adwaita";
   environment.etc = {
     "xdg/alacritty/alacritty.toml" = {
       text = ''
         [env]
           term = "xterm-256color"
+
+        #TODO: test alacritty themes 
+        # [general]
+        #   import = [
+        #     '/run/current-system/sw/share/alacritty-theme/one_dark.toml'
+        #   ]
 
         [font]
           normal = {family = "Jetbrains Mono Nerd Font", style = "SemiBold"}

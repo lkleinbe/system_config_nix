@@ -46,12 +46,14 @@
     # colorschemes.kanagawa.enable = true;
     # colorschemes.kanagawa.settings.terminalColors = true;
 
+    # One dark Theme. Toggle between light and dark with <leader>tl
     colorschemes.onedark.enable = true;
     colorschemes.onedark.settings = {
       style = "darker";
       transparent = true;
       lualine.transparent = true;
-
+      toggle_style_list = [ "light" "darker" ];
+      toggle_style_key = "<leader>tl";
     };
 
     performance.byteCompileLua.enable = true;
@@ -208,21 +210,21 @@
         options.desc = "Move to last character in line";
       }
       {
-        mode = ["n" "v"];
+        mode = [ "n" "v" ];
         key = "<S-j>";
         action = "<C-f>";
         options.desc = "Move one screen down";
         options.noremap = true;
       }
       {
-        mode = ["n" "v"];
+        mode = [ "n" "v" ];
         key = "<S-k>";
         action = "<C-b>";
         options.desc = "Move one screen up";
         options.noremap = true;
       }
       {
-        mode = ["n" "v"];
+        mode = [ "n" "v" ];
         key = "<C-j>";
         action = "J";
         options.desc = "Join lines";
