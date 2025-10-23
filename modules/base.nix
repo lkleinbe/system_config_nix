@@ -34,10 +34,12 @@
     settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
   };
 
-  services.resolved.enable = true;
+  services.resolved.enable = true; # this is systemd-resolved
+  # services.resolved.llmnr = "true";
   networking.networkmanager.enable = true;
-  systemd.services."NetworkManager-wait-online".enable = false;
   networking.networkmanager.dns = "systemd-resolved";
+  networking.networkmanager.wifi.powersave = false;
+  systemd.network.wait-online.anyInterface = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -138,6 +140,10 @@
     settings.UseDns = true;
     settings.PasswordAuthentication = lib.mkDefault false;
   };
+  # Allow passwordless sudo if connected via ssh and agent is forwarded
+  security.pam.sshAgentAuth.enable = true;
+  security.pam.services.sudo.sshAgentAuth = true;
+
   xdg.mime.defaultApplications = {
     "text/plain" = "org.gnome.TextEditor.desktop";
   };
