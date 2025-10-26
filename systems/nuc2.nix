@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
+  imports = [
+    ../modules/base.nix
+    ../modules/dconf/dconf_desktop1.nix
+    ../modules/performance_governor.nix
+    ../modules/motd.nix
+  ];
   networking.hostName = "dumba-nuc2";
   system.stateVersion = "25.05";
 

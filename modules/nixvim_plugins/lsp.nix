@@ -95,9 +95,7 @@
         };
         lua_ls = {
           enable = true;
-          settings = {
-            completion.callSnippet = "Replace";
-          };
+          settings = { completion.callSnippet = "Replace"; };
         };
       };
 
@@ -108,6 +106,33 @@
             #mode = "n";
             action = "setloclist";
             desc = "Open diagnostic [Q]uickfix list";
+          };
+        };
+
+        lspBuf = {
+          # Rename the variable under your cursor.
+          #  Most Language Servers support renaming across files, etc.
+          "<leader>rn" = {
+            action = "rename";
+            desc = "LSP: [R]e[n]ame";
+          };
+          # Execute a code action, usually your cursor needs to be on top of an error
+          # or a suggestion from your LSP for this to activate.
+          "<leader>ca" = {
+            #mode = "n";
+            action = "code_action";
+            desc = "LSP: [C]ode [A]ction";
+          };
+          # WARN: This is not Goto Definition, this is Goto Declaration.
+          #  For example, in C this would take you to the header.
+          "gD" = {
+            action = "declaration";
+            desc = "LSP: [G]oto [D]eclaration";
+          };
+          "<C-k>" = {
+            action = "hover";
+            mode = "n";
+            desc = "LSP: Peek documentation";
           };
         };
 
@@ -164,27 +189,6 @@
           }
         ];
 
-        lspBuf = {
-          # Rename the variable under your cursor.
-          #  Most Language Servers support renaming across files, etc.
-          "<leader>rn" = {
-            action = "rename";
-            desc = "LSP: [R]e[n]ame";
-          };
-          # Execute a code action, usually your cursor needs to be on top of an error
-          # or a suggestion from your LSP for this to activate.
-          "<leader>ca" = {
-            #mode = "n";
-            action = "code_action";
-            desc = "LSP: [C]ode [A]ction";
-          };
-          # WARN: This is not Goto Definition, this is Goto Declaration.
-          #  For example, in C this would take you to the header.
-          "gD" = {
-            action = "declaration";
-            desc = "LSP: [G]oto [D]eclaration";
-          };
-        };
       };
 
       # LSP servers and clients are able to communicate to each other what features they support.
@@ -223,6 +227,7 @@
             group = highlight_augroup,
             callback = vim.lsp.buf.document_highlight,
           })
+
 
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = bufnr,

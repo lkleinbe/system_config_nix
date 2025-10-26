@@ -21,23 +21,25 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelParams = [
-    "intel_pstate=enable" # intel
+    "intel_pstate=enable" # intel pstate driver to change gpu frequency
     "intel_idle_max_cstate=1" # intel
     "energy_perf_bias=performance"
     "processor.max_cstate=1" # amd
   ];
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
-  # services.power-profiles-daemon.enable = false;
-  # services.tlp = {
-  #   enable = true;
-  #   settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
-  # };
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
+  };
 
-  services.resolved.enable = true;
+  services.resolved.enable = true; # this is systemd-resolved
+  # services.resolved.llmnr = "true";
   networking.networkmanager.enable = true;
-  systemd.services."NetworkManager-wait-online".enable = false;
   networking.networkmanager.dns = "systemd-resolved";
+  networking.networkmanager.wifi.powersave = false;
+  systemd.network.wait-online.anyInterface = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -46,7 +48,7 @@
 
   # Internationalisation properties
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
-
+  i18n.extraLocales = [ "de_DE.UTF-8/UTF-8" ];
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
     LC_IDENTIFICATION = "de_DE.UTF-8";
@@ -77,7 +79,7 @@
   #console keymap
   console.keyMap = "de";
   # enable CUPS to print documents
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
@@ -138,6 +140,10 @@
     settings.UseDns = true;
     settings.PasswordAuthentication = lib.mkDefault false;
   };
+  # Allow passwordless sudo if connected via ssh and agent is forwarded
+  security.pam.sshAgentAuth.enable = true;
+  security.pam.services.sudo.sshAgentAuth = true;
+
   xdg.mime.defaultApplications = {
     "text/plain" = "org.gnome.TextEditor.desktop";
   };
