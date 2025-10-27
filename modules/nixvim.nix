@@ -50,10 +50,10 @@
     colorschemes.onedark.enable = true;
     colorschemes.onedark.settings = {
       style = "darker";
-      transparent = true;
-      lualine.transparent = true;
+      # transparent = true;
+      # lualine.transparent = true;
       toggle_style_list = [ "light" "darker" ];
-      toggle_style_key = "<leader>tl";
+      toggle_style_key = "<leader>lm";
     };
 
     performance.byteCompileLua.enable = true;

@@ -106,6 +106,8 @@
     wget
     curl
     htop
+    unzip
+    nettools
     git
     vim
     wl-clipboard
