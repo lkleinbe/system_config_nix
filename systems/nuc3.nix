@@ -3,7 +3,6 @@
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
     ../modules/performance_governor.nix
-    ../modules/motd.nix
   ];
   networking.hostName = "dumba-nuc3";
   system.stateVersion = "25.05";
@@ -33,8 +32,10 @@
       [
         #  thunderbird
       ];
-    openssh.authorizedKeys.keyFiles =
-      [ ../public_ssh_keys/work_laptop_ssh.pub ];
+    openssh.authorizedKeys.keyFiles = [
+      ../public_ssh_keys/work_windows_ssh.pub
+      ../public_ssh_keyswork_nixos_ssh.pub
+    ];
   };
 
   # services.openssh.settings.PasswordAuthentication = true;    #NOTE uncomment this to allow SSH Password authentication

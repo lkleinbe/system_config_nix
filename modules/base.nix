@@ -4,6 +4,7 @@
     ./nixvim.nix
     ./alacritty.nix
     ./tmux.nix
+    ./motd.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = {
