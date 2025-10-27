@@ -64,6 +64,14 @@
           ./systems/kulli.nix
         ];
       };
+      dumba-laptop = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          nixvim.nixosModules.nixvim
+          lanzaboote.nixosModules.lanzaboote
+          ./systems/laptop.nix
+        ];
+      };
     };
   };
 }
