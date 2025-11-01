@@ -120,7 +120,6 @@
     gnome-pomodoro
     zathura
     vscode-extensions.vadimcn.vscode-lldb
-    kitty
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;

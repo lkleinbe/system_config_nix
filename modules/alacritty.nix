@@ -1,18 +1,11 @@
 { pkgs, inputs, lib, ... }: {
-  environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ alacritty alacritty-theme ]) ];
+  environment.systemPackages = lib.mkMerge [ (with pkgs; [ alacritty kitty ]) ];
   environment.variables.XCURSOR_THEME = "Adwaita";
   environment.etc = {
     "xdg/alacritty/alacritty.toml" = {
       text = ''
         [env]
           term = "xterm-256color"
-
-        #TODO: test alacritty themes 
-        # [general]
-        #   import = [
-        #     '/run/current-system/sw/share/alacritty-theme/one_dark.toml'
-        #   ]
 
         [font]
           normal = {family = "Jetbrains Mono Nerd Font", style = "SemiBold"}
@@ -60,45 +53,45 @@
           hide_when_typing = true
       '';
     };
-    "xdg/kitty/kitty.conf" = {
-      text = ''
-        font_family JetBrainsMono Nerd Font
-        font_size 10.0
-
-        background #1e2127
-        foreground #abb2bf
-
-        # Normal colors
-        color0 #1e2127
-        color1 #e06c75
-        color2 #98c379
-        color3 #d19a66
-        color4 #61afef
-        color5 #c678dd
-        color6 #56b6c2
-        color7 #828791
-
-        # Bright colors
-        color8 #5c6370
-        color9 #e06c75
-        color10 #98c379
-        color11 #d19a66
-        color12 #61afef
-        color13 #c678dd
-        color14 #56b6c2
-        color15 #e6efff
-
-        # Mouse settings
-        mouse_hide_wait 2.0
-
-        # Environment variable
-        term xterm-256color
-
-        confirm_os_window_close 0
-        window_margin_width 0 0 2
-        cursor_trail 10
-        corsor_trail_start_threshold 4
-      '';
-    };
+    # "xdg/kitty/kitty.conf" = {
+    #   text = ''
+    #     font_family JetBrainsMono Nerd Font
+    #     font_size 10.0
+    #
+    #     background #1e2127
+    #     foreground #abb2bf
+    #
+    #     # Normal colors
+    #     color0 #1e2127
+    #     color1 #e06c75
+    #     color2 #98c379
+    #     color3 #d19a66
+    #     color4 #61afef
+    #     color5 #c678dd
+    #     color6 #56b6c2
+    #     color7 #828791
+    #
+    #     # Bright colors
+    #     color8 #5c6370
+    #     color9 #e06c75
+    #     color10 #98c379
+    #     color11 #d19a66
+    #     color12 #61afef
+    #     color13 #c678dd
+    #     color14 #56b6c2
+    #     color15 #e6efff
+    #
+    #     # Mouse settings
+    #     mouse_hide_wait 2.0
+    #
+    #     # Environment variable
+    #     term xterm-256color
+    #
+    #     confirm_os_window_close 0
+    #     window_margin_width 0 0 2
+    #     cursor_trail 10
+    #     cursor_trail_start_threshold 4
+    #   '';
+    # };
   };
 }

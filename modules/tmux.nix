@@ -145,7 +145,7 @@ in {
   environment.variables.NEW_TMUX_CMD = lib.mkDefault "";
   #Automaticly go into tmux session
   programs.bash.interactiveShellInit = ''
-    if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && { [[ -n "$SSH_TTY" ]]||[[ "$TERM" == "alacritty" ]]||[[ "$TERM" == "xterm-256color" ]]; }; then
+    if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && { [[ -n "$SSH_TTY" ]]||[[ "$TERM" == "alacritty" ]]; }; then
     	tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux "motd; exec $SHELL"
     fi
   '';

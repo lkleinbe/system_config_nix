@@ -31,6 +31,8 @@
     openssh.authorizedKeys.keyFiles = [ ];
   };
 
+  hardware.graphics.enable = true;
+
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
 
@@ -42,10 +44,6 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs;
-      [
-        # htop
-      ])
-  ];
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ discord gnuradio ]) ];
 }
