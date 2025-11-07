@@ -32,8 +32,8 @@
       [
         #  thunderbird
       ];
-    openssh.authorizedKeys.keyFiles =
-      [ ../public_ssh_keys/work_laptop_ssh.pub ];
+    # openssh.authorizedKeys.keyFiles =
+    #   [ ../public_ssh_keys/work_windows_ssh.pub ];
   };
 
   # services.openssh.settings.PasswordAuthentication =
