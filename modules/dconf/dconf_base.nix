@@ -1,11 +1,11 @@
 { pkgs, inputs, lib, config, ... }: {
   environment.etc = {
     "wallpapers/wallpaper.png" = {
-      source = ../../wallpapers/wallpaper.png;
+      source = ../../assets/wallpaper.png;
       mode = "0644";
     };
     "wallpapers/wallpaper1.png" = {
-      source = ../../wallpapers/wallpaper1.png;
+      source = ../../assets/wallpaper1.png;
       mode = "0644";
     };
   };
