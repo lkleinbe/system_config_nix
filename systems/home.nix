@@ -67,6 +67,7 @@
       typst
       godot_4_4
       discord
+      gnuradio
       # htop
     ])
   ];
