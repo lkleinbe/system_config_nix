@@ -51,7 +51,9 @@
   environment.systemPackages = lib.mkMerge [
     (with pkgs;
       [
+        uhd
         # htop
       ])
   ];
+  virtualisation.docker.enable = true;
 }

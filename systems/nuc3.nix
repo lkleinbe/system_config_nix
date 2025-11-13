@@ -48,10 +48,6 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs;
-      [
-        # htop
-      ])
-  ];
+  environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
+  virtualisation.docker.enable = true;
 }
