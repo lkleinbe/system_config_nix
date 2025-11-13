@@ -34,7 +34,7 @@
       ];
     openssh.authorizedKeys.keyFiles = [
       ../public_ssh_keys/work_windows_ssh.pub
-      ../public_ssh_keyswork_nixos_ssh.pub
+      ../public_ssh_keys/work_nixos_ssh.pub
     ];
   };
 
