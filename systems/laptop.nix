@@ -38,6 +38,8 @@
 
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-broadcom;
+  security.pam.services.sudo.fprintAuth = false;
 
   # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
