@@ -53,6 +53,7 @@
   environment.systemPackages = lib.mkMerge [
     (with pkgs;
       [
+        uhd
         # htop
       ])
   ];
