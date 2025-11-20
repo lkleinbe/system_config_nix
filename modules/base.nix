@@ -114,6 +114,8 @@
     gnome-pomodoro
     zathura
     vscode-extensions.vadimcn.vscode-lldb
+    claude-code
+    gemini-cli
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
