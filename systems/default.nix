@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
   networking.hostName = "dumba-home";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use secure boot there is a 5 step process:

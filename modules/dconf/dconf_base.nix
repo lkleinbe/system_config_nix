@@ -14,10 +14,10 @@
     profiles.user.databases = [{
       settings = {
         # Enable the System Monitor extension
-        "org/gnome/shell" = {
-          enabled-extensions =
-            [ "pomodoro@arun.codito.in" "mediacontrols@cliffniff.github.com" ];
-        };
+        # "org/gnome/shell" = {
+        #   enabled-extensions =
+        #     [ "pomodoro@arun.codito.in" "mediacontrols@cliffniff.github.com" ];
+        # };
         # dark theme
         "org/gnome/desktop/interface" = { "color-scheme" = "prefer-dark"; };
         "org/gnome/shell/extensions/mediacontrols" = {

@@ -1,0 +1,23 @@
+# Ghostty Configuration
+# Syncs with GNOME light/dark mode preference
+
+# Font settings
+font-family = JetBrainsMono Nerd Font
+font-size = 10
+
+# Auto-switch theme based on system preference
+theme = light:theme-light,dark:theme-dark
+
+# Mouse settings
+mouse-hide-while-typing = true
+
+# Window settings
+# window-padding-x = 0
+# window-padding-y = 0,0,2
+
+# Cursor settings
+cursor-style-blink = false
+
+# # Shell integration
+shell-integration = detect
+shell-integration-features = ssh-env

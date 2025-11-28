@@ -21,6 +21,7 @@
   boot.loader.systemd-boot.enable = lib.mkDefault true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "intel_pstate=enable" # intel pstate driver to change gpu frequency
     "intel_idle_max_cstate=1" # intel
@@ -29,7 +30,7 @@
   ];
 
   services.resolved.enable = true; # this is systemd-resolved
-  # services.resolved.llmnr = "true";
+  services.resolved.llmnr = "true";
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "systemd-resolved";
   networking.networkmanager.wifi.powersave = false;
@@ -61,9 +62,9 @@
   #   enable = true;
   #   settings.numlock = true;
   # };
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.autoSuspend = false;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.autoSuspend = false;
+  services.desktopManager.gnome.enable = true;
 
   # X11 keymap
   services.xserver.xkb = {

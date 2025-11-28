@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
   networking.hostName = "dumba-laptop";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use secure boot there is a 5 step process:
@@ -47,6 +47,12 @@
     User git
     IdentityFile /home/dumba/.ssh/id_ed25519
   '';
+
+  # services.avahi = {
+  #   enable = true;
+  #   nssmdns4 = true;
+  #   openFirewall = true;
+  # };
 
   # system packages
   environment.systemPackages =

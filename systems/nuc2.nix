@@ -5,7 +5,7 @@
     ../modules/performance_governor.nix
   ];
   networking.hostName = "dumba-nuc2";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use secure boot there is a 5 step process:
