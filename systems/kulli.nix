@@ -55,6 +55,7 @@
     enable = true;
     drivers = [ pkgs.gutenprint ];
   };
+  #TODO: i should not need this anymore
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -82,6 +83,6 @@
     "x-scheme-handler/mailto" = "userapp-Thunderbird-ESWFE3.desktop";
     "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";
     "x-scheme-handler/mid" = "userapp-Thunderbird-ESWFE3.desktop";
-    "application/pdf" = "org.gnome.Evince.desktop";
+    "application/pdf" = "org.gnome.Papers.desktop";
   };
 }

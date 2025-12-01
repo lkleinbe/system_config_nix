@@ -51,6 +51,7 @@
     enable = true;
     drivers = [ pkgs.gutenprint ];
   };
+  #TODO: i should not need this anymore
   services.avahi = {
     enable = true;
     nssmdns4 = true;

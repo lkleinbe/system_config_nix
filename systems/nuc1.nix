@@ -21,8 +21,6 @@
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
-  virtualisation.docker.enable = true;
-  boot.extraModprobeConfig = "options drm_kms_helper poll=N";
 
   #User Configuration
   users.users.dumba = {
@@ -51,11 +49,6 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs;
-      [
-        uhd
-        # htop
-      ])
-  ];
+  environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
+  virtualisation.docker.enable = true;
 }
