@@ -4,6 +4,7 @@
     ./nixvim.nix
     ./alacritty.nix
     ./tmux.nix
+    ./motd.nix
   ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = {
@@ -20,22 +21,16 @@
   boot.loader.systemd-boot.enable = lib.mkDefault true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "intel_pstate=enable" # intel pstate driver to change gpu frequency
     "intel_idle_max_cstate=1" # intel
     "energy_perf_bias=performance"
     "processor.max_cstate=1" # amd
   ];
-  powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
-  };
 
   services.resolved.enable = true; # this is systemd-resolved
-  # services.resolved.llmnr = "true";
+  services.resolved.llmnr = "true";
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "systemd-resolved";
   networking.networkmanager.wifi.powersave = false;
@@ -67,9 +62,9 @@
   #   enable = true;
   #   settings.numlock = true;
   # };
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.autoSuspend = false;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.autoSuspend = false;
+  services.desktopManager.gnome.enable = true;
 
   # X11 keymap
   services.xserver.xkb = {
@@ -99,6 +94,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  security.pki.certificateFiles = [ ../assets/nas_internal_ca.crt ];
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   environment.systemPackages = with pkgs; [
@@ -106,6 +102,8 @@
     wget
     curl
     htop
+    unzip
+    nettools
     git
     vim
     wl-clipboard
@@ -117,7 +115,8 @@
     gnome-pomodoro
     zathura
     vscode-extensions.vadimcn.vscode-lldb
-    kitty
+    claude-code
+    gemini-cli
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;

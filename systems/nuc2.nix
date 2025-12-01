@@ -3,10 +3,9 @@
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
     ../modules/performance_governor.nix
-    ../modules/motd.nix
   ];
   networking.hostName = "dumba-nuc2";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use secure boot there is a 5 step process:
@@ -33,8 +32,11 @@
       [
         #  thunderbird
       ];
-    openssh.authorizedKeys.keyFiles =
-      [ ../public_ssh_keys/work_laptop_ssh.pub ];
+    openssh.authorizedKeys.keyFiles = [
+      ../public_ssh_keys/work_windows_ssh.pub
+      ../public_ssh_keys/work_nixos_ssh.pub
+      ../public_ssh_keys/home_pc_ssh.pub
+    ];
   };
 
   # services.openssh.settings.PasswordAuthentication = true;    #NOTE uncomment this to allow SSH Password authentication
@@ -47,10 +49,6 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs;
-      [
-        # htop
-      ])
-  ];
+  environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
+  virtualisation.docker.enable = true;
 }

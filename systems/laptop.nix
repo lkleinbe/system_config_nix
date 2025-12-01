@@ -1,10 +1,6 @@
 { config, pkgs, lib, ... }: {
-  imports = [
-    ../modules/base.nix
-    ../modules/dconf/dconf_desktop1.nix
-    ../modules/performance_governor.nix
-  ];
-  networking.hostName = "dumba-nuc3";
+  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
+  networking.hostName = "dumba-laptop";
   system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
@@ -16,11 +12,11 @@
   # 5. reboot again
   # 6. (you can use bootctl and sbctl status to check the secure boot status)
 
-  boot.loader.systemd-boot.enable = false;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
+  # boot.loader.systemd-boot.enable = false;
+  # boot.lanzaboote = {
+  #   enable = true;
+  #   pkiBundle = "/var/lib/sbctl";
+  # };
 
   #User Configuration
   users.users.dumba = {
@@ -32,14 +28,18 @@
       [
         #  thunderbird
       ];
-    openssh.authorizedKeys.keyFiles = [
-      ../public_ssh_keys/work_windows_ssh.pub
-      ../public_ssh_keys/work_nixos_ssh.pub
-      ../public_ssh_keys/home_pc_ssh.pub
-    ];
+    openssh.authorizedKeys.keyFiles = [ ];
   };
 
-  # services.openssh.settings.PasswordAuthentication = true;    #NOTE uncomment this to allow SSH Password authentication
+  hardware.graphics.enable = true;
+
+  # services.openssh.settings.PasswordAuthentication =
+  #   true; # NOTE uncomment this to allow SSH Password authentication
+
+  services.fprintd.enable = true;
+  services.fprintd.tod.enable = true;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-broadcom;
+  security.pam.services.sudo.fprintAuth = false;
 
   # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
@@ -48,7 +48,13 @@
     IdentityFile /home/dumba/.ssh/id_ed25519
   '';
 
+  # services.avahi = {
+  #   enable = true;
+  #   nssmdns4 = true;
+  #   openFirewall = true;
+  # };
+
   # system packages
-  environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
-  virtualisation.docker.enable = true;
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ discord gnuradio ]) ];
 }

@@ -1,11 +1,11 @@
 { pkgs, inputs, lib, config, ... }: {
   environment.etc = {
     "wallpapers/wallpaper.png" = {
-      source = ../../wallpapers/wallpaper.png;
+      source = ../../assets/wallpaper.png;
       mode = "0644";
     };
     "wallpapers/wallpaper1.png" = {
-      source = ../../wallpapers/wallpaper1.png;
+      source = ../../assets/wallpaper1.png;
       mode = "0644";
     };
   };
@@ -14,10 +14,10 @@
     profiles.user.databases = [{
       settings = {
         # Enable the System Monitor extension
-        "org/gnome/shell" = {
-          enabled-extensions =
-            [ "pomodoro@arun.codito.in" "mediacontrols@cliffniff.github.com" ];
-        };
+        # "org/gnome/shell" = {
+        #   enabled-extensions =
+        #     [ "pomodoro@arun.codito.in" "mediacontrols@cliffniff.github.com" ];
+        # };
         # dark theme
         "org/gnome/desktop/interface" = { "color-scheme" = "prefer-dark"; };
         "org/gnome/shell/extensions/mediacontrols" = {

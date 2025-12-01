@@ -122,7 +122,7 @@ in {
       # set -g status-justify left
       # set -g status-style 'fg=colour0 dim'
       set -g status-left '''
-      set -g status-right '%Y-%m-%d %H:%M | #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) '
+      set -g status-right '%Y-%m-%d %H:%M | #{pomodoro_status} |#(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) '
       # set -g status-right-length 50
       # set -g status-left-length 10
       set -g status-interval 1
@@ -145,7 +145,7 @@ in {
   environment.variables.NEW_TMUX_CMD = lib.mkDefault "";
   #Automaticly go into tmux session
   programs.bash.interactiveShellInit = ''
-    if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && { [[ -n "$SSH_TTY" ]]||[[ "$TERM" == "alacritty" ]]||[[ "$TERM" == "xterm-256color" ]]; }; then
+    if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && { [[ -n "$SSH_TTY" ]]||[[ "$TERM" == "alacritty" ]]; }; then
     	tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux "motd; exec $SHELL"
     fi
   '';

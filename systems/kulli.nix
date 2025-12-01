@@ -5,7 +5,7 @@
     ../modules/nas_samba_client.nix
   ];
   networking.hostName = "kulli-home";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use secure boot there is a 5 step process:
@@ -55,6 +55,7 @@
     enable = true;
     drivers = [ pkgs.gutenprint ];
   };
+  #TODO: i should not need this anymore
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -82,6 +83,6 @@
     "x-scheme-handler/mailto" = "userapp-Thunderbird-ESWFE3.desktop";
     "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";
     "x-scheme-handler/mid" = "userapp-Thunderbird-ESWFE3.desktop";
-    "application/pdf" = "org.gnome.Evince.desktop";
+    "application/pdf" = "org.gnome.Papers.desktop";
   };
 }

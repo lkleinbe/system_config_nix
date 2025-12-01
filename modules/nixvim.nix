@@ -50,10 +50,10 @@
     colorschemes.onedark.enable = true;
     colorschemes.onedark.settings = {
       style = "darker";
-      transparent = true;
-      lualine.transparent = true;
+      # transparent = true;
+      # lualine.transparent = true;
       toggle_style_list = [ "light" "darker" ];
-      toggle_style_key = "<leader>tl";
+      toggle_style_key = "<leader>lm";
     };
 
     performance.byteCompileLua.enable = true;
@@ -254,6 +254,7 @@
       }
     ];
 
+    nixpkgs.config.allowUnfree = true;
     plugins = {
       # Adds icons for plugins to utilize in ui
       web-devicons.enable = true;
@@ -263,6 +264,7 @@
       sleuth.enable = true;
       typst-preview.enable = true;
       typst-vim.enable = true;
+      claude-code.enable = true;
     };
 
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
