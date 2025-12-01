@@ -63,7 +63,7 @@
   #   settings.numlock = true;
   # };
   services.displayManager.gdm.enable = true;
-  # services.displayManager.gdm.autoSuspend = false;
+  services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
 
   # X11 keymap
