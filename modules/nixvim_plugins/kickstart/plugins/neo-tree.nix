@@ -5,10 +5,10 @@
     plugins.neo-tree = {
       enable = true;
       settings = {
-        closeIfLastWindow = true;
-        autoCleanAfterSessionRestore = true;
+        close_if_last_window = true;
+        auto_clean_after_session_restore = true;
         filesystem = {
-          filteredItems.visible = true;
+          filtered_items.visible = true;
           window = { mappings = { "\\" = "close_window"; }; };
         };
         # window.position="right";
