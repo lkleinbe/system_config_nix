@@ -131,6 +131,7 @@
     gnomeExtensions.open-bar
     gnomeExtensions.media-controls
     gnomeExtensions.dash-to-panel
+    gnomeExtensions.arc-menu
     gnome-pomodoro
     zathura
     vscode-extensions.vadimcn.vscode-lldb
