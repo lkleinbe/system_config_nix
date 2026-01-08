@@ -57,6 +57,7 @@
     nssmdns4 = true;
     openFirewall = true;
   };
+  services.tailscale.enable = true;
 
   #scanning setup
   hardware.sane.enable = true;
@@ -69,6 +70,8 @@
       godot_4_4
       discord
       gnuradio
+      spotify
+      bitwarden-desktop
       # htop
     ])
   ];
