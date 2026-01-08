@@ -34,6 +34,7 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "systemd-resolved";
   networking.networkmanager.wifi.powersave = false;
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
   systemd.network.wait-online.anyInterface = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -117,6 +118,8 @@
     vscode-extensions.vadimcn.vscode-lldb
     claude-code
     gemini-cli
+    texliveFull
+    uv
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
@@ -139,6 +142,8 @@
     settings.UseDns = true;
     settings.PasswordAuthentication = lib.mkDefault false;
   };
+
+  environment.variables.UV_PYTHON_DOWNLOADS = "never";
   # Allow passwordless sudo if connected via ssh and agent is forwarded
   security.pam.sshAgentAuth.enable = true;
   security.pam.services.sudo.sshAgentAuth = true;

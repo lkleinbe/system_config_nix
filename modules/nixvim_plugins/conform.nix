@@ -10,6 +10,7 @@
       isort
       black
       nixfmt-classic
+      rustfmt
     ];
 
     # Autoformat
@@ -36,11 +37,14 @@
           # Conform can also run multiple formatters sequentially
           python = [ "isort" "black" ];
           nix = [ "nixfmt" ];
+          rust = [ "rustfmt" ];
+          tex = [ "latexindent" ];
           #
           # You can use a sublist to tell conform to run *until* a formatter
           # is found
           # javascript = [ [ "prettierd" "prettier" ] ];
         };
+        formatters.latexindent.prepend_args = [ "-m" ];
       };
     };
 

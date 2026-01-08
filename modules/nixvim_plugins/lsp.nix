@@ -86,6 +86,11 @@
         cmake.enable = true;
         pyright.enable = true;
         tinymist.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installCargo = true;
+          installRustc = true;
+        };
         ltex = {
           enable = true;
           settings.ltex.language = "en-GB";

@@ -36,10 +36,12 @@
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
 
+  services.tailscale.enable = true;
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-broadcom;
   security.pam.services.sudo.fprintAuth = false;
+  services.printing.enable = true;
 
   # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
@@ -56,5 +58,6 @@
 
   # system packages
   environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ discord gnuradio ]) ];
+    lib.mkMerge [ (with pkgs; [ discord gnuradio spotify ]) ];
+
 }

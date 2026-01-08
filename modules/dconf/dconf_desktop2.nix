@@ -1,5 +1,12 @@
 { pkgs, inputs, lib, ... }: {
   imports = [ ./dconf_base.nix ];
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [
+      gnomeExtensions.dash-to-panel
+      gnomeExtensions.media-controls
+      gnome-pomodoro
+    ])
+  ];
   programs.dconf = {
     profiles.user.databases = [{
       settings = {

@@ -1,5 +1,12 @@
 { pkgs, inputs, lib, config, ... }: {
   imports = [ ./dconf_base.nix ];
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [
+      gnomeExtensions.open-bar
+      gnomeExtensions.media-controls
+      gnome-pomodoro
+    ])
+  ];
   programs.dconf = {
     profiles.user.databases = lib.mkMerge [[{
       settings = {
@@ -32,8 +39,8 @@
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
           {
             binding = "<Ctrl><Alt>t";
-            command = "alacritty";
-            name = "alacritty terminal";
+            command = "ghostty";
+            name = "ghostty terminal";
           };
         "org/gnome/desktop/wm/keybindings" = { toggle-fullscreen = [ "F11" ]; };
         "org/gnome/settings_daemon/plugins/power" = {

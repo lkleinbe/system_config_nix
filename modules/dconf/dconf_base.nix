@@ -41,8 +41,8 @@
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
           {
             binding = "<Ctrl><Alt>t";
-            command = "alacritty";
-            name = "alacritty terminal";
+            command = "ghostty";
+            name = "ghostty terminal";
           };
         "org/gnome/desktop/wm/keybindings" = { toggle-fullscreen = [ "F11" ]; };
         "org/gnome/settings-daemon/plugins/power" = {

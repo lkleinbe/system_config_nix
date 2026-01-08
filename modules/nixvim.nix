@@ -273,6 +273,7 @@
       nvim-web-devicons # TODO: Figure out how to configure using this with telescope
       tabout-nvim # allow escaping brackets with tab
       vim-tpipeline
+      vim-sentence-chopper
     ];
 
     # TODO: Figure out where to move this
