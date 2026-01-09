@@ -1,6 +1,6 @@
 { pkgs, nixvim, lib, ... }: {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    # /etc/nixos/hardware-configuration.nix
     ./nixvim.nix
     ./alacritty.nix
     ./tmux.nix

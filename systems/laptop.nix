@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
+  imports = [
+    ../hardware/hardware-configuration_laptop.nix
+    ../modules/base.nix
+    ../modules/dconf/dconf_desktop1.nix
+  ];
   networking.hostName = "dumba-laptop";
   system.stateVersion = "25.11";
 
@@ -58,6 +62,6 @@
 
   # system packages
   environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ discord gnuradio spotify ]) ];
+    lib.mkMerge [ (with pkgs; [ discord gnuradio spotify bitwarden-desktop ]) ];
 
 }
