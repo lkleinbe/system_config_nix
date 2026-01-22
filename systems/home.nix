@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
+    ../hardware/hardware-configuration_home.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
     ../modules/elgato.nix
