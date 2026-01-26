@@ -29,13 +29,30 @@
     "processor.max_cstate=1" # amd
   ];
 
+  # Systemd-resolved for dns resolution
   services.resolved.enable = true; # this is systemd-resolved
   services.resolved.llmnr = "true";
+  services.resolved.extraConfig = "MulticastDNS=no";
   networking.networkmanager.enable = true;
   networking.networkmanager.dns = "systemd-resolved";
+
+  # Avahi for local domain resolution and printers
+  services.avahi.enable = true;
+  services.avahi.nssmdns4 = true;
+  services.avahi.nssmdns6 = true;
+  services.avahi.openFirewall = true;
+  services.avahi.publish = {
+    enable = true;
+    workstation = true;
+    addresses = true;
+  };
+
+  # Leave WIFI turned on and dont stop boot, if one interface is not connected
   networking.networkmanager.wifi.powersave = false;
-  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
   systemd.network.wait-online.anyInterface = true;
+
+  # openvnp for gnome
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -57,12 +74,7 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # X11 windowing system & Gnome
   services.xserver.enable = true;
-  # services.displayManager.ly = {
-  #   enable = true;
-  #   settings.numlock = true;
-  # };
   services.displayManager.gdm.enable = true;
   services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
@@ -74,8 +86,6 @@
   };
   #console keymap
   console.keyMap = "de";
-  # enable CUPS to print documents
-  # services.printing.enable = true;
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
@@ -95,7 +105,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  security.pki.certificateFiles = [ ../assets/nas_internal_ca.crt ];
+  # Jetbrains Mono nerd font
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   environment.systemPackages = with pkgs; [
@@ -128,6 +138,7 @@
   #   "3.3"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
   # environment.variables.MESA_GL_VERSION_OVERRIDE =
   #   "2.1"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
+
   programs.git = {
     enable = true;
     lfs.enable = true;
