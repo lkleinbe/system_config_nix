@@ -30,25 +30,30 @@
   ];
 
   # Systemd-resolved for dns resolution
-  services.resolved.enable = true; # this is systemd-resolved
-  services.resolved.llmnr = "true";
-  services.resolved.extraConfig = "MulticastDNS=no";
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "systemd-resolved";
-
-  # Avahi for local domain resolution and printers
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
-  services.avahi.nssmdns6 = true;
-  services.avahi.openFirewall = true;
-  services.avahi.publish = {
+  services.resolved = {
     enable = true;
-    workstation = true;
-    addresses = true;
+    llmnr = "true";
+    extraConfig = "MulticastDNS=no";
   };
 
-  # Leave WIFI turned on and dont stop boot, if one interface is not connected
-  networking.networkmanager.wifi.powersave = false;
+  # Avahi for local domain resolution and printers
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      workstation = true;
+      addresses = true;
+    };
+  };
+
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+    wifi.powersave = false;
+  };
   systemd.network.wait-online.anyInterface = true;
 
   # openvnp for gnome
