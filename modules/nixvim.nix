@@ -144,6 +144,7 @@
       # Minimal number of screen lines to keep above and below the cursor
       scrolloff = 5;
       shiftwidth = 2;
+      tabstop = 2;
       # See `:help hlsearch`
       hlsearch = true;
 
@@ -261,9 +262,7 @@
 
       # Detect tabstop and shiftwidth automatically
       # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
-      sleuth.enable = true;
-      typst-preview.enable = true;
-      typst-vim.enable = true;
+      # sleuth.enable = true;
       claude-code.enable = true;
     };
 

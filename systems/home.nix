@@ -67,7 +67,6 @@
   # system packages
   environment.systemPackages = lib.mkMerge [
     (with pkgs; [
-      typst
       godot_4_4
       discord
       gnuradio
