@@ -21,3 +21,5 @@ cursor-style-blink = false
 # # Shell integration
 shell-integration = detect
 shell-integration-features = ssh-env
+
+custom-shader = shaders/cursor_warp.glsl

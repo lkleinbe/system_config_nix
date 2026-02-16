@@ -2,29 +2,29 @@
 # Referenced when system is in light mode
 
 # Background and foreground
-background = e4e5f5
-foreground = 19152c
+background = fafafa
+foreground = 383a42
 
 # Selection colors
-selection-background = ff16b0
-selection-foreground = 19152c
+selection-background = 4078f2
+selection-foreground = fafafa
 
 # Normal colors (palette 0-7)
-palette = 0=#000000
-palette = 1=#ff16b0
-palette = 2=#00af4f
-palette = 3=#ff8d01
-palette = 4=#0098fd
-palette = 5=#f806fa
-palette = 6=#00b2be
-palette = 7=#feffff
+palette = 0=#101012
+palette = 1=#e45649
+palette = 2=#50a14f
+palette = 3=#c18401
+palette = 4=#4078f2
+palette = 5=#a626a4
+palette = 6=#0184bc
+palette = 7=#f0f0f0
 
 # Bright colors (palette 8-15)
-palette = 8=#000000
-palette = 9=#ff16b0
-palette = 10=#00af4f
-palette = 11=#ff8d01
-palette = 12=#0098fd
-palette = 13=#f806fa
-palette = 14=#00b2be
-palette = 15=#feffff
+palette = 8=#a0a1a7
+palette = 9=#833b3b
+palette = 10=#50a14f
+palette = 11=#986801
+palette = 12=#68aee8
+palette = 13=#79428a
+palette = 14=#2b5d63
+palette = 15=#fafafa

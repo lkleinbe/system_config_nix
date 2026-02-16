@@ -1,5 +1,4 @@
 { pkgs, inputs, lib, config, ... }: {
-  imports = [ ./dconf_base.nix ];
   environment.systemPackages = lib.mkMerge [
     (with pkgs; [
       gnomeExtensions.open-bar
@@ -7,8 +6,19 @@
       gnome-pomodoro
     ])
   ];
+  environment.etc = {
+    "wallpapers/wallpaper.png" = {
+      source = ../../assets/wallpaper.png;
+      mode = "0644";
+    };
+    "wallpapers/wallpaper1.png" = {
+      source = ../../assets/wallpaper1.png;
+      mode = "0644";
+    };
+  };
   programs.dconf = {
-    profiles.user.databases = lib.mkMerge [[{
+    enable = true;
+    profiles.user.databases = [{
       settings = {
         "org/gnome/shell" = {
           enabled-extensions =
@@ -21,6 +31,11 @@
           "picture-uri" = "/etc/wallpapers/wallpaper1.png";
           "picture-uri-dark" = "/etc/wallpapers/wallpaper1.png";
         };
+        # dark theme
+        "org/gnome/desktop/interface" = { "color-scheme" = "prefer-dark"; };
+        "org/gnome/shell/extensions/mediacontrols" = {
+          "scroll-labels" = false;
+        };
         # Enable minimize and maximize Buttons
         "org/gnome/desktop/wm/preferences" = {
           "button-layout" = "appmenu:minimize,maximize,close";
@@ -31,6 +46,7 @@
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
           ];
         };
+        # Disable Automatic sleep
         "org/gnome/settings-daemon/plugins/power" = {
           "sleep-inactive-ac-type" = "nothing";
           "sleep-inactive-ac-timeout" = "0:i";
@@ -46,8 +62,11 @@
         "org/gnome/settings_daemon/plugins/power" = {
           power-profile = "performance";
         };
+        "org/gnome/desktop/peripherals/mouse" = { accel-profile = "flat"; };
+        "org/gnome/shell".favorite-apps =
+          [ "org.gnome.Nautilus.desktop" "firefox.desktop" ];
       };
-    }]];
+    }];
   };
 
 }

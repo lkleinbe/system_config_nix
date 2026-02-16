@@ -1,26 +1,16 @@
 { pkgs, inputs, lib, ... }: {
-  imports = [ ./dconf_base.nix ];
-  environment.systemPackages = lib.mkMerge [
-    (with pkgs; [
-      gnomeExtensions.dash-to-panel
-      gnomeExtensions.media-controls
-      gnome-pomodoro
-    ])
-  ];
+  imports = [ ./dconf_desktop1.nix ];
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ gnomeExtensions.dash-to-panel ]) ];
   programs.dconf = {
     profiles.user.databases = [{
       settings = {
-        "org/gnome/shell" = {
+        "org/gnome/shell" = lib.mkMerge {
           enabled-extensions = [
             "pomodoro@arun.codito.in"
             "mediacontrols@cliffniff.github.com"
             "dash-to-panel@jderose9.github.com"
           ];
-        };
-        "org/gnome/desktop/background" = {
-          "picture-options" = "zoom";
-          "picture-uri" = "/etc/wallpapers/wallpaper1.png";
-          "picture-uri-dark" = "/etc/wallpapers/wallpaper1.png";
         };
         "org/gnome/shell/extensions/dash-to-panel" = {
           "appicon-margin" = "8:i";

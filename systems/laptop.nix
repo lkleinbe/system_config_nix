@@ -26,7 +26,7 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     # user packages
     packages = with pkgs;
       [
@@ -36,6 +36,13 @@
   };
 
   hardware.graphics.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
+
+  xdg.icons.enable = true;
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
@@ -54,6 +61,9 @@
     IdentityFile /home/dumba/.ssh/id_ed25519
   '';
 
+  programs.nix-ld.enable = true;
+  virtualisation.docker.enable = true;
+
   # services.avahi = {
   #   enable = true;
   #   nssmdns4 = true;
@@ -61,7 +71,14 @@
   # };
 
   # system packages
-  environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ discord gnuradio spotify bitwarden-desktop ]) ];
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [
+      discord
+      gnuradio
+      spotify
+      bitwarden-desktop
+      adwaita-icon-theme
+    ])
+  ];
 
 }
