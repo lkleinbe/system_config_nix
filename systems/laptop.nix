@@ -37,13 +37,6 @@
 
   hardware.graphics.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-  };
-
-  xdg.icons.enable = true;
-
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
 
@@ -63,12 +56,6 @@
 
   programs.nix-ld.enable = true;
   virtualisation.docker.enable = true;
-
-  # services.avahi = {
-  #   enable = true;
-  #   nssmdns4 = true;
-  #   openFirewall = true;
-  # };
 
   # system packages
   environment.systemPackages = lib.mkMerge [

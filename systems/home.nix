@@ -27,7 +27,7 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "docker" ];
     # user packages
     packages = with pkgs;
       [
@@ -64,6 +64,10 @@
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 
+  virtualisation.docker.enable = true;
+  programs.nix-ld.enable = true;
+  hardware.graphics.enable = true;
+
   # system packages
   environment.systemPackages = lib.mkMerge [
     (with pkgs; [
@@ -72,6 +76,8 @@
       gnuradio
       spotify
       bitwarden-desktop
+      beancount
+      fava
       # htop
     ])
   ];

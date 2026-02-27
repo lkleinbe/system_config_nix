@@ -85,7 +85,7 @@
         nixd.enable = true;
         cmake.enable = true;
         pyright.enable = true;
-        tinymist.enable = true;
+        beancount.enable = true;
         rust_analyzer = {
           enable = true;
           installCargo = true;

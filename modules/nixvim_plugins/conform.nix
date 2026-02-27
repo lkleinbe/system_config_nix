@@ -11,6 +11,7 @@
       black
       nixfmt-classic
       rustfmt
+      beancount-black
     ];
 
     # Autoformat
@@ -39,6 +40,7 @@
           nix = [ "nixfmt" ];
           rust = [ "rustfmt" ];
           tex = [ "latexindent" ];
+          beancount = [ "beancount-black" ];
           #
           # You can use a sublist to tell conform to run *until* a formatter
           # is found

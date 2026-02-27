@@ -138,6 +138,9 @@
     gemini-cli
     texliveFull
     uv
+    arxiv-latex-cleaner
+    adwaita-icon-theme
+    hicolor-icon-theme
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
@@ -170,4 +173,9 @@
   xdg.mime.defaultApplications = {
     "text/plain" = "org.gnome.TextEditor.desktop";
   };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
+  xdg.icons.enable = true;
 }
