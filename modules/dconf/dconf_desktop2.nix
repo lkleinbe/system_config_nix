@@ -7,7 +7,7 @@
   programs.dconf = {
     profiles.user.databases = [{
       settings = {
-        "org/gnome/shell" = lib.mkMerge {
+        "org/gnome/shell" = {
           enabled-extensions = [
             "pomodoro@arun.codito.in"
             "mediacontrols@cliffniff.github.com"

@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }: {
   imports = [
+    ../hardware/hardware-configuration_kulli.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop2.nix
     ../modules/nas_samba_client.nix
+
   ];
   networking.hostName = "kulli-home";
   system.stateVersion = "25.11";
