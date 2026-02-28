@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
+  imports = [
+    ../hardware/hardware-configuration_gameserver.nix
+    ../modules/base.nix
+    ../modules/dconf/dconf_desktop1.nix
+  ];
   networking.hostName = "gameserver";
   system.stateVersion = "25.11";
 

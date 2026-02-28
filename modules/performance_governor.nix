@@ -12,4 +12,10 @@
     enable = true;
     settings = { CPU_ENERGY_PERF_POLICY_ON_AC = "performance"; };
   };
+
+  services.udev.extraRules = ''
+    # Disable USB power management for all devices
+    ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on"
+  '';
+
 }

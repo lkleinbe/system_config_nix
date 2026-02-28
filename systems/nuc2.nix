@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
+    ../hardware/hardware-configuration_nuc2.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
     ../modules/performance_governor.nix

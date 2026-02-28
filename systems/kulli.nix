@@ -1,8 +1,10 @@
 { config, pkgs, lib, ... }: {
   imports = [
+    ../hardware/hardware-configuration_kulli.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop2.nix
     ../modules/nas_samba_client.nix
+
   ];
   networking.hostName = "kulli-home";
   system.stateVersion = "25.11";
@@ -79,6 +81,7 @@
     enable = true;
     enable32Bit = true;
   };
+
   xdg.mime.defaultApplications = {
     "x-scheme-handler/mailto" = "userapp-Thunderbird-ESWFE3.desktop";
     "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";

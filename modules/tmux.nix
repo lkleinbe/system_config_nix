@@ -46,6 +46,7 @@ in {
     baseIndex = 1;
     clock24 = true;
     # plugins = with pkgs; [ tmuxPlugins.onedark-theme ];
+    #TODO: align tmux vertical and horizontal split with nixvim
     extraConfig = ''
       # remap prefix from 'C-b' to 'C-Space'
       # unbind C-b

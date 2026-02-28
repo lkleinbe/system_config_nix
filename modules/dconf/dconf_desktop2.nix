@@ -1,5 +1,9 @@
 { pkgs, inputs, lib, ... }: {
-  imports = [ ./dconf_base.nix ];
+  imports = [ ./dconf_desktop1.nix ];
+  environment.systemPackages =
+    lib.mkMerge [ (with pkgs; [ gnomeExtensions.dash-to-panel ]) ];
+  services.desktopManager.gnome.extraGSettingsOverridePackages =
+    [ pkgs.mutter ];
   programs.dconf = {
     profiles.user.databases = [{
       settings = {
@@ -10,6 +14,7 @@
             "dash-to-panel@jderose9.github.com"
           ];
         };
+        "org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
         "org/gnome/desktop/background" = {
           "picture-options" = "zoom";
           "picture-uri" = "/etc/wallpapers/wallpaper1.png";
@@ -37,6 +42,7 @@
           "focus-highlight-color" = "#eeeeee";
           "focus-highlight-dominant" = false;
           "focus-highlight-opacity" = "15:i";
+          "hide-overview-on-startup" = true;
           "hotkeys-overlay-combo" = "TEMPORARILY";
           "intellihide" = false;
           "intellihide-behaviour" = "ALL_WINDOWS";
@@ -45,7 +51,7 @@
           "intellihide-show-on-notification" = false;
           "panel-anchors" = ''{"DEL-6FT6M23":"MIDDLE","DEL-92T6M23":"MIDDLE"}'';
           "panel-element-positions" = ''
-            {"DEL-6FT6M23":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}],"DEL-92T6M23":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'';
+            {"DEL-6FT6M23":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}],"DEL-92T6M23":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'';
           "panel-lengths" = ''{"DEL-6FT6M23":100,"DEL-92T6M23":100}'';
           "panel-positions" =
             ''{"DEL-6FT6M23":"BOTTOM","DEL-92T6M23":"BOTTOM"}'';

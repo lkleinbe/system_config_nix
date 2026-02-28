@@ -1,11 +1,14 @@
 { pkgs, nixvim, lib, ... }: {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    # /etc/nixos/hardware-configuration.nix
     ./nixvim.nix
     ./alacritty.nix
     ./tmux.nix
     ./motd.nix
   ];
+
+  #just trying suda-vim
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.gc = {
     automatic = true;
@@ -27,14 +30,38 @@
     "intel_idle_max_cstate=1" # intel
     "energy_perf_bias=performance"
     "processor.max_cstate=1" # amd
+    "snd_hda_intel.probe_mask=1"
   ];
 
-  services.resolved.enable = true; # this is systemd-resolved
-  services.resolved.llmnr = "true";
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "systemd-resolved";
-  networking.networkmanager.wifi.powersave = false;
+  # Systemd-resolved for dns resolution
+  services.resolved = {
+    enable = true;
+    llmnr = "true";
+    extraConfig = "MulticastDNS=no";
+  };
+
+  # Avahi for local domain resolution and printers
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      workstation = true;
+      addresses = true;
+    };
+  };
+
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+    wifi.powersave = false;
+  };
   systemd.network.wait-online.anyInterface = true;
+
+  # openvnp for gnome
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -57,7 +84,7 @@
   };
 
   # X11 windowing system & Gnome
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
   # services.displayManager.ly = {
   #   enable = true;
   #   settings.numlock = true;
@@ -73,8 +100,6 @@
   };
   #console keymap
   console.keyMap = "de";
-  # enable CUPS to print documents
-  # services.printing.enable = true;
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
@@ -94,7 +119,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  security.pki.certificateFiles = [ ../assets/nas_internal_ca.crt ];
+  # Jetbrains Mono nerd font
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   environment.systemPackages = with pkgs; [
@@ -112,11 +137,17 @@
     gnomeExtensions.open-bar
     gnomeExtensions.media-controls
     gnomeExtensions.dash-to-panel
+    gnomeExtensions.arc-menu
     gnome-pomodoro
     zathura
     vscode-extensions.vadimcn.vscode-lldb
     claude-code
     gemini-cli
+    texliveFull
+    uv
+    arxiv-latex-cleaner
+    adwaita-icon-theme
+    hicolor-icon-theme
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
@@ -125,6 +156,7 @@
   #   "3.3"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
   # environment.variables.MESA_GL_VERSION_OVERRIDE =
   #   "2.1"; # NOTE This is a fix for alacritty in virtualbox. When the bug is fixed this might not be necessary
+
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -139,6 +171,8 @@
     settings.UseDns = true;
     settings.PasswordAuthentication = lib.mkDefault false;
   };
+
+  environment.variables.UV_PYTHON_DOWNLOADS = "never";
   # Allow passwordless sudo if connected via ssh and agent is forwarded
   security.pam.sshAgentAuth.enable = true;
   security.pam.services.sudo.sshAgentAuth = true;
@@ -146,4 +180,9 @@
   xdg.mime.defaultApplications = {
     "text/plain" = "org.gnome.TextEditor.desktop";
   };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
+  xdg.icons.enable = true;
 }

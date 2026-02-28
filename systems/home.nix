@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
+    ../hardware/hardware-configuration_home.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
     ../modules/elgato.nix
@@ -26,7 +27,7 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "docker" ];
     # user packages
     packages = with pkgs;
       [
@@ -57,18 +58,26 @@
     nssmdns4 = true;
     openFirewall = true;
   };
+  services.tailscale.enable = true;
 
   #scanning setup
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 
+  virtualisation.docker.enable = true;
+  programs.nix-ld.enable = true;
+  hardware.graphics.enable = true;
+
   # system packages
   environment.systemPackages = lib.mkMerge [
     (with pkgs; [
-      typst
       godot_4_4
       discord
       gnuradio
+      spotify
+      bitwarden-desktop
+      beancount
+      fava
       # htop
     ])
   ];

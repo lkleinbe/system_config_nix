@@ -1,5 +1,12 @@
+# This system is just for getting started quickly.
+# You should copy this system configuration and add the new hardware configuration.
+# This system needs the --impure flag to read the current hardware-configuration
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+    ../modules/base.nix
+    ../modules/dconf/dconf_desktop1.nix
+  ];
   networking.hostName = "dumba-home";
   system.stateVersion = "25.11";
 

@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }: {
-  imports = [ ../modules/base.nix ../modules/dconf/dconf_desktop1.nix ];
+  imports = [
+    ../hardware/hardware-configuration_laptop.nix
+    ../modules/base.nix
+    ../modules/dconf/dconf_desktop1.nix
+  ];
   networking.hostName = "dumba-laptop";
   system.stateVersion = "25.11";
 
@@ -22,7 +26,7 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     # user packages
     packages = with pkgs;
       [
@@ -36,10 +40,12 @@
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
 
+  services.tailscale.enable = true;
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-broadcom;
   security.pam.services.sudo.fprintAuth = false;
+  services.printing.enable = true;
 
   # Use the local private key of user for authentication in the gitlab for this system flake
   programs.ssh.extraConfig = ''
@@ -48,13 +54,18 @@
     IdentityFile /home/dumba/.ssh/id_ed25519
   '';
 
-  # services.avahi = {
-  #   enable = true;
-  #   nssmdns4 = true;
-  #   openFirewall = true;
-  # };
+  programs.nix-ld.enable = true;
+  virtualisation.docker.enable = true;
 
   # system packages
-  environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ discord gnuradio ]) ];
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [
+      discord
+      gnuradio
+      spotify
+      bitwarden-desktop
+      adwaita-icon-theme
+    ])
+  ];
+
 }

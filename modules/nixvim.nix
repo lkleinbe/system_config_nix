@@ -55,6 +55,10 @@
       toggle_style_list = [ "light" "darker" ];
       toggle_style_key = "<leader>lm";
     };
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
 
     performance.byteCompileLua.enable = true;
 
@@ -91,18 +95,12 @@
       showmode = false;
 
       #  See `:help 'clipboard'`
-      clipboard = {
-        providers = {
-          wl-copy.enable = true; # For Wayland
-          xsel.enable = true; # For X11
-        };
-
-        #          ╭──────────────────────────────────────────────────────────╮
-        #          │           Sync clipboard between OS and Neovim           │
-        #          ╰──────────────────────────────────────────────────────────╯
-        #  Remove this option if you want your OS clipboard to remain independent.
-        register = "unnamedplus";
-      };
+      # clipboard = {
+      #   providers = {
+      #     wl-copy.enable = true; # For Wayland
+      #   };
+      #   register = "unnamedplus";
+      # };
 
       # Enable break indent
       breakindent = true;
@@ -144,6 +142,7 @@
       # Minimal number of screen lines to keep above and below the cursor
       scrolloff = 5;
       shiftwidth = 2;
+      tabstop = 2;
       # See `:help hlsearch`
       hlsearch = true;
 
@@ -261,10 +260,14 @@
 
       # Detect tabstop and shiftwidth automatically
       # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
-      sleuth.enable = true;
-      typst-preview.enable = true;
-      typst-vim.enable = true;
+      # sleuth.enable = true;
       claude-code.enable = true;
+      vim-suda.enable = true;
+      neotest = {
+        enable = true;
+        adapters.ctest.enable = true;
+        # adapters.python.enable = true;
+      };
     };
 
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
@@ -273,6 +276,7 @@
       nvim-web-devicons # TODO: Figure out how to configure using this with telescope
       tabout-nvim # allow escaping brackets with tab
       vim-tpipeline
+      vim-sentence-chopper
     ];
 
     # TODO: Figure out where to move this
