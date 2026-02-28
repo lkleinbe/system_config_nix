@@ -4,10 +4,6 @@
     lib.mkMerge [ (with pkgs; [ gnomeExtensions.dash-to-panel ]) ];
   services.desktopManager.gnome.extraGSettingsOverridePackages =
     [ pkgs.mutter ];
-  services.desktopManager.gnome.extraGSettingsOverrides = ''
-    [org.gnome.mutter]
-    experimental-features=['scale-monitor-framebuffer']
-  '';
   programs.dconf = {
     profiles.user.databases = [{
       settings = {

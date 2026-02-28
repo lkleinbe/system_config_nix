@@ -30,6 +30,7 @@
     "intel_idle_max_cstate=1" # intel
     "energy_perf_bias=performance"
     "processor.max_cstate=1" # amd
+    "snd_hda_intel.probe_mask=1"
   ];
 
   # Systemd-resolved for dns resolution
@@ -82,7 +83,12 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  services.xserver.enable = true;
+  # X11 windowing system & Gnome
+  # services.xserver.enable = true;
+  # services.displayManager.ly = {
+  #   enable = true;
+  #   settings.numlock = true;
+  # };
   services.displayManager.gdm.enable = true;
   services.displayManager.gdm.autoSuspend = false;
   services.desktopManager.gnome.enable = true;
