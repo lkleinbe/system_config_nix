@@ -37,6 +37,7 @@
     ./nixvim_plugins/custom/plugins/tmux-navigator.nix
     ./nixvim_plugins/custom/plugins/lualine.nix
     ./nixvim_plugins/custom/plugins/zen-mode.nix
+    ./nixvim_plugins/custom/plugins/trouble.nix
   ];
 
   programs.nixvim = {
@@ -143,6 +144,7 @@
       scrolloff = 5;
       shiftwidth = 2;
       tabstop = 2;
+      expandtab = true;
       # See `:help hlsearch`
       hlsearch = true;
 
