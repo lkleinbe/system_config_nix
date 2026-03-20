@@ -52,4 +52,8 @@
   # system packages
   environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
   virtualisation.docker.enable = true;
+
+  #RBIS Ports
+  networking.firewall.allowedTCPPorts = [ 1988 ];
+  networking.firewall.allowedUDPPorts = [ 1988 ];
 }
