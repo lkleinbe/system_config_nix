@@ -10,6 +10,7 @@
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
     ../modules/elgato.nix
+    ../modules/nas_samba_client.nix
   ];
   networking.hostName = "dumba-home";
   system.stateVersion = "26.05";
@@ -87,6 +88,7 @@
       bitwarden-desktop
       beancount
       fava
+      beanquery
       # htop
     ])
   ];

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   programs.nixvim = {
     # Highlight, edit, and navigate code
     # https://nix-community.github.io/nixvim/plugins/treesitter/index.html
@@ -6,30 +7,30 @@
       enable = true;
       settings = {
         # TODO: Don't think I need this as nixGrammars is true which should auto install these???
-        grammarPackages =
-          with config.plugins.treesitter.package.builtGrammars; [
-            "bash"
-            "c"
-            "diff"
-            "html"
-            "lua"
-            "luadoc"
-            "markdown"
-            "markdown_inline"
-            "query"
-            "vim"
-            "vimdoc"
-            "cpp"
-            "python"
+        grammarPackages = with config.plugins.treesitter.package.builtGrammars; [
+          "bash"
+          "c"
+          "diff"
+          "html"
+          "lua"
+          "luadoc"
+          "markdown"
+          "markdown_inline"
+          "query"
+          "vim"
+          "vimdoc"
+          "cpp"
+          "python"
+          "beancount"
 
-          ];
+        ];
 
-        # highlight = {
-        #   enable = true;
-
-        #   # Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        #   additional_vim_regex_highlighting = true;
-        # };
+        highlight = {
+          enable = true;
+          disable = [ "csv" ];
+          # Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+          # additional_vim_regex_highlighting = true;
+        };
         indent.enable = true;
         # indent = {
         #   enable = true;
