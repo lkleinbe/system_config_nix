@@ -89,6 +89,7 @@
       beancount
       fava
       beanquery
+      beanhub-cli
       # htop
     ])
   ];
