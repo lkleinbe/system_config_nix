@@ -45,6 +45,7 @@ in {
     shortcut = "Space";
     baseIndex = 1;
     clock24 = true;
+    historyLimit = 10000;
     # plugins = with pkgs; [ tmuxPlugins.onedark-theme ];
     #TODO: align tmux vertical and horizontal split with nixvim
     extraConfig = ''

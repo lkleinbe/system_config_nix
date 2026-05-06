@@ -126,7 +126,7 @@
     sbctl # this is needed for lanzaboote (secure boot)
     wget
     curl
-    htop
+    btop
     unzip
     nettools
     git

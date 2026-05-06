@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
   programs.nixvim = {
     # Highlight, edit, and navigate code
     # https://nix-community.github.io/nixvim/plugins/treesitter/index.html
@@ -6,22 +6,23 @@
       enable = true;
       settings = {
         # TODO: Don't think I need this as nixGrammars is true which should auto install these???
-        ensureInstalled = [
-          "bash"
-          "c"
-          "diff"
-          "html"
-          "lua"
-          "luadoc"
-          "markdown"
-          "markdown_inline"
-          "query"
-          "vim"
-          "vimdoc"
-          "cpp"
-          "python"
+        grammarPackages =
+          with config.plugins.treesitter.package.builtGrammars; [
+            "bash"
+            "c"
+            "diff"
+            "html"
+            "lua"
+            "luadoc"
+            "markdown"
+            "markdown_inline"
+            "query"
+            "vim"
+            "vimdoc"
+            "cpp"
+            "python"
 
-        ];
+          ];
 
         # highlight = {
         #   enable = true;

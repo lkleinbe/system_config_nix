@@ -13,8 +13,15 @@
       # url = "github:nix-community/nixvim/nixos-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    antsdr-uhd = {
+      url = "git+https://git-in.dfki.de/lekl02/antsdr_uhd_flake.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
-  outputs = inputs@{ self, nixpkgs, nixvim, lanzaboote, ... }: {
+  inputs.self.submodules = true;
+  outputs = inputs@{ self, nixpkgs, nixvim, lanzaboote, antsdr-uhd, ... }: {
     nixosConfigurations = {
       dumba-home = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -66,6 +73,7 @@
       };
       dumba-laptop = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { antsdr-uhd = inputs.antsdr-uhd; };
         modules = [
           nixvim.nixosModules.nixvim
           lanzaboote.nixosModules.lanzaboote

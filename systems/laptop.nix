@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, antsdr-uhd, ... }: {
   imports = [
     ../hardware/hardware-configuration_laptop.nix
     ../modules/base.nix
@@ -36,6 +36,25 @@
   };
 
   hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    open = true;
+    nvidiaSettings = true;
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+      offload = { # use either offload or sync
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      # sync.enable = true; # use either offload or sync
+    };
+  };
+  services.switcherooControl.enable =
+    true; # gnome context menu switch for nvidia gpu
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
@@ -65,7 +84,11 @@
       spotify
       bitwarden-desktop
       adwaita-icon-theme
+      usbutils
+      antsdr-uhd.packages.${pkgs.system}.antsdr-uhd
     ])
   ];
 
+  services.udev.packages = [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
+  services.tlp.settings.USB_AUTOSUSPEND = 0;
 }

@@ -5,8 +5,12 @@
 
   environment.etc."xdg/ghostty".source = ../assets/ghostty;
   system.userActivationScripts.ghosttyConfig = ''
-    mkdir -p $HOME/.config
-    ln -sfn /etc/xdg/ghostty $HOME/.config/ghostty
+    case "$HOME" in
+      /home/*)
+        mkdir -p "$HOME/.config"
+        ln -sfn /etc/xdg/ghostty "$HOME/.config/ghostty"
+        ;;
+    esac
   '';
 
   environment.etc."xdg/alacritty/alacritty.toml" = {

@@ -1,4 +1,4 @@
-{ pkgs, inputs, nixvim, ... }: {
+{ pkgs, lib, inputs, nixvim, ... }: {
   imports = [
     # Plugins
     ./nixvim_plugins/gitsigns.nix
@@ -265,10 +265,11 @@
       # sleuth.enable = true;
       claude-code.enable = true;
       vim-suda.enable = true;
-      neotest = {
+      cmake-tools = {
         enable = true;
-        adapters.ctest.enable = true;
-        # adapters.python.enable = true;
+        settings = {
+          # cmake_executor.
+        };
       };
     };
 
@@ -284,9 +285,14 @@
     # TODO: Figure out where to move this
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapre
     extraConfigLuaPre = ''
-      require('tabout').setup {}
-      if vim.g.have_nerd_font then
-        require('nvim-web-devicons').setup {}
+        require('tabout').setup {}
+        if vim.g.have_nerd_font then
+          require('nvim-web-devicons').setup {}
+        end
+      for _, dir in ipairs(vim.opt.packpath:get()) do
+        for _, grammar in ipairs(vim.fn.glob(dir .. "/pack/*/start/vimplugin-treesitter-*", false, true)) do
+          vim.opt.runtimepath:prepend(grammar)
+        end
       end
     '';
 
