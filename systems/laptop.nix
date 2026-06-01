@@ -98,10 +98,10 @@
       # bitwarden-desktop
       adwaita-icon-theme
       usbutils
-      antsdr-uhd.packages.${pkgs.system}.antsdr-uhd
+      antsdr-uhd.packages.${pkgs.stdenv.hostPlatform.system}.antsdr-uhd
     ])
   ];
 
-  services.udev.packages = [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
+  services.udev.packages = [ antsdr-uhd.packages.${pkgs.stdenv.hostPlatform.system}.antsdr-uhd ];
   services.tlp.settings.USB_AUTOSUSPEND = 0;
 }
