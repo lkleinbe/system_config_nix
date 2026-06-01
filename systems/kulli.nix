@@ -1,4 +1,10 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ../hardware/hardware-configuration_kulli.nix
     ../modules/base.nix
@@ -10,18 +16,16 @@
   system.stateVersion = "25.11";
 
   # NOTE: Uncomment this if you want to use secure boot
-  # To use secure boot there is a 5 step process:
-  # 1. run sudo sbctl create-keys
-  # 2. uncomment the code block below and rebuild-switch
-  # 3. reboot and with secure boot enabled in setup mode
-  # 4. run sudo sbctl enroll-keys --microsoft
-  # 5. reboot again
-  # 6. (you can use bootctl and sbctl status to check the secure boot status)
+  # lanzaboote will automatically enroll the keys
+  # (you can use bootctl and sbctl status to check the secure boot status)
 
   boot.loader.systemd-boot.enable = false;
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
+    autoGenerateKeys.enable = true;
+    autoEnrollKeys.enable = true;
+    autoEnrollKeys.autoReboot = true;
   };
 
   i18n.defaultLocale = "de_DE.UTF-8";
@@ -30,12 +34,16 @@
   users.users.kulli = {
     isNormalUser = true;
     description = "kulli";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "scanner"
+      "lp"
+    ];
     # user packages
-    packages = with pkgs;
-      [
-        #  thunderbird
-      ];
+    packages = with pkgs; [
+      #  thunderbird
+    ];
     openssh.authorizedKeys.keyFiles = [
       ../public_ssh_keys/home_pc_ssh.pub
       ../public_ssh_keys/home_windows_ssh.pub
@@ -69,9 +77,15 @@
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
 
   # system packages
-  environment.systemPackages =
-    lib.mkMerge [ (with pkgs; [ libreoffice cifs-utils ]) ];
-  programs.thunderbird = { enable = true; };
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [
+      libreoffice
+      cifs-utils
+    ])
+  ];
+  programs.thunderbird = {
+    enable = true;
+  };
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
