@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.nixvim = {
     # Dependencies
     # { 'Bilal2453/luvit-meta', lazy = true },
@@ -6,22 +7,29 @@
     #
     # Allows extra capabilities providied by nvim-cmp
     # https://nix-community.github.io/nixvim/plugins/cmp-nvim-lsp.html
-    plugins.cmp-nvim-lsp = { enable = true; };
+    plugins.cmp-nvim-lsp = {
+      enable = true;
+    };
 
     # Useful status updates for LSP.
     # https://nix-community.github.io/nixvim/plugins/fidget/index.html
-    plugins.fidget = { enable = true; };
+    plugins.fidget = {
+      enable = true;
+    };
 
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugi#extraplugins
-    extraPlugins = with pkgs.vimPlugins;
-      [
-        # NOTE: This is where you would add a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
-        #
-        # TODO: Add luvit-meta when Nixos package is added
-      ];
+    extraPlugins = with pkgs.vimPlugins; [
+      # NOTE: This is where you would add a vim plugin that is not implemented in Nixvim, also see extraConfigLuaPre below
+      #
+      # TODO: Add luvit-meta when Nixos package is added
+    ];
 
     # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
-    autoGroups = { "kickstart-lsp-attach" = { clear = true; }; };
+    autoGroups = {
+      "kickstart-lsp-attach" = {
+        clear = true;
+      };
+    };
 
     diagnostic.settings = {
       virtual_text = {
@@ -60,12 +68,14 @@
     #
     # https://nix-community.github.io/nixvim/plugins/lsp/index.html
     plugins.clangd-extensions.enable = true;
-    keymaps = [{
-      mode = "n";
-      key = "<leader>gh";
-      action = ":ClangdSwitchSourceHeader<CR>";
-      options.desc = "Go to Header/Source";
-    }];
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>gh";
+        action = ":ClangdSwitchSourceHeader<CR>";
+        options.desc = "Go to Header/Source";
+      }
+    ];
 
     plugins.lsp = {
       enable = true;
@@ -100,7 +110,9 @@
         };
         lua_ls = {
           enable = true;
-          settings = { completion.callSnippet = "Replace"; };
+          settings = {
+            completion.callSnippet = "Replace";
+          };
         };
       };
 
@@ -149,14 +161,18 @@
             mode = "n";
             key = "gd";
             action.__raw = "require('telescope.builtin').lsp_definitions";
-            options = { desc = "LSP: [G]oto [D]efinition"; };
+            options = {
+              desc = "LSP: [G]oto [D]efinition";
+            };
           }
           # Find references for the word under your cursor.
           {
             mode = "n";
             key = "gr";
             action.__raw = "require('telescope.builtin').lsp_references";
-            options = { desc = "LSP: [G]oto [R]eferences"; };
+            options = {
+              desc = "LSP: [G]oto [R]eferences";
+            };
           }
           # Jump to the implementation of the word under your cursor.
           #  Useful when your language has ways of declaring types without an actual implementation.
@@ -164,7 +180,9 @@
             mode = "n";
             key = "gI";
             action.__raw = "require('telescope.builtin').lsp_implementations";
-            options = { desc = "LSP: [G]oto [I]mplementation"; };
+            options = {
+              desc = "LSP: [G]oto [I]mplementation";
+            };
           }
           # Jump to the type of the word under your cursor.
           #  Useful when you're not sure what type a variable is and you want to see
@@ -173,7 +191,9 @@
             mode = "n";
             key = "<leader>D";
             action.__raw = "require('telescope.builtin').lsp_type_definitions";
-            options = { desc = "LSP: Type [D]efinition"; };
+            options = {
+              desc = "LSP: Type [D]efinition";
+            };
           }
           # Fuzzy find all the symbols in your current document.
           #  Symbols are things like variables, functions, types, etc.
@@ -181,16 +201,19 @@
             mode = "n";
             key = "<leader>ds";
             action.__raw = "require('telescope.builtin').lsp_document_symbols";
-            options = { desc = "LSP: [D]ocument [S]ymbols"; };
+            options = {
+              desc = "LSP: [D]ocument [S]ymbols";
+            };
           }
           # Fuzzy find all the symbols in your current workspace.
           #  Similar to document symbols, except searches over your entire project.
           {
             mode = "n";
             key = "<leader>ws";
-            action.__raw =
-              "require('telescope.builtin').lsp_dynamic_workspace_symbols";
-            options = { desc = "LSP: [W]orkspace [S]ymbols"; };
+            action.__raw = "require('telescope.builtin').lsp_dynamic_workspace_symbols";
+            options = {
+              desc = "LSP: [W]orkspace [S]ymbols";
+            };
           }
         ];
 
@@ -225,7 +248,7 @@
         --    See `:help CursorHold` for information about when this is executed
         --
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = bufnr,
@@ -253,7 +276,7 @@
         -- code, if the language server you are using supports them
         --
         -- This may be unwanted, since they displace some of your code
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
           map('<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oggle Inlay [H]ints')

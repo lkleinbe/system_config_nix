@@ -9,7 +9,7 @@
       clang
       isort
       black
-      nixfmt-classic
+      nixfmt
       rustfmt
       beancount-black
       cmake-format

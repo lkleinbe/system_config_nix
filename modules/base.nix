@@ -36,8 +36,9 @@
   # Systemd-resolved for dns resolution
   services.resolved = {
     enable = true;
-    llmnr = "true";
-    extraConfig = "MulticastDNS=no";
+    settings.Resolve.LLMNR = "true";
+    # llmnr = "true";
+    # extraConfig = "MulticastDNS=no";
   };
 
   # Avahi for local domain resolution and printers

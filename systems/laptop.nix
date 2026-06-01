@@ -1,11 +1,18 @@
-{ config, pkgs, lib, antsdr-uhd, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  antsdr-uhd,
+  ...
+}:
+{
   imports = [
     ../hardware/hardware-configuration_laptop.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
   ];
   networking.hostName = "dumba-laptop";
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # NOTE: Uncomment this if you want to use secure boot
   # To use secure boot there is a 5 step process:
@@ -16,22 +23,28 @@
   # 5. reboot again
   # 6. (you can use bootctl and sbctl status to check the secure boot status)
 
-  # boot.loader.systemd-boot.enable = false;
-  # boot.lanzaboote = {
-  #   enable = true;
-  #   pkiBundle = "/var/lib/sbctl";
-  # };
+  boot.loader.systemd-boot.enable = false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+    autoGenerateKeys.enable = true;
+    autoEnrollKeys.enable = true;
+    autoEnrollKeys.autoReboot = true;
+  };
 
   #User Configuration
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     # user packages
-    packages = with pkgs;
-      [
-        #  thunderbird
-      ];
+    packages = with pkgs; [
+      #  thunderbird
+    ];
     openssh.authorizedKeys.keyFiles = [ ];
   };
 
@@ -46,15 +59,15 @@
     prime = {
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
-      offload = { # use either offload or sync
+      offload = {
+        # use either offload or sync
         enable = true;
         enableOffloadCmd = true;
       };
       # sync.enable = true; # use either offload or sync
     };
   };
-  services.switcherooControl.enable =
-    true; # gnome context menu switch for nvidia gpu
+  services.switcherooControl.enable = true; # gnome context menu switch for nvidia gpu
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
@@ -82,7 +95,7 @@
       discord
       gnuradio
       spotify
-      bitwarden-desktop
+      # bitwarden-desktop
       adwaita-icon-theme
       usbutils
       antsdr-uhd.packages.${pkgs.system}.antsdr-uhd
