@@ -141,6 +141,8 @@ in {
       # messages
       set -g message-style 'fg=colour2 bg=colour0 bold'
 
+      set -g allow-passthrough on
+
     '';
   };
 

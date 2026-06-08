@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
+{ config, pkgs, lib, antsdr-uhd, ... }: {
   imports = [
     ../hardware/hardware-configuration_nuc3.nix
     ../modules/base.nix
@@ -31,14 +25,9 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "networkmanager" "wheel" ];
     # user packages
-    packages = with pkgs; [
-      #  thunderbird
-    ];
+    packages = with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
     openssh.authorizedKeys.keyFiles = [
       ../public_ssh_keys/work_windows_ssh.pub
       ../public_ssh_keys/work_nixos_ssh.pub
@@ -56,7 +45,9 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
+  environment.systemPackages = lib.mkMerge
+    [ (with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ]) ];
+  services.udev.packages = [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
   virtualisation.docker.enable = true;
 
   #RBIS Ports
