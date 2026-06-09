@@ -56,9 +56,13 @@
 
   # system packages
   environment.systemPackages = lib.mkMerge [
-    (with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ])
+    (with pkgs; [
+      # antsdr-uhd.packages.${pkgs.system}.antsdr-uhd
+      uhd
+    ])
   ];
-  services.udev.packages = [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
+
+  # services.udev.packages = [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
 
   #RBIS Ports
   virtualisation.docker.enable = true;
