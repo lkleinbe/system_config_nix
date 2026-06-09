@@ -1,4 +1,11 @@
-{ config, pkgs, lib, antsdr-uhd, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  antsdr-uhd,
+  ...
+}:
+{
   imports = [
     ../hardware/hardware-configuration_nuc3.nix
     ../modules/base.nix
@@ -6,7 +13,7 @@
     ../modules/performance_governor.nix
   ];
   networking.hostName = "dumba-nuc3";
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # NOTE: Uncomment this if you want to use secure boot
   # lanzaboote will automatically enroll the keys
@@ -25,7 +32,10 @@
   users.users.dumba = {
     isNormalUser = true;
     description = "dumba";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     # user packages
     packages = with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
     openssh.authorizedKeys.keyFiles = [
@@ -45,12 +55,13 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge
-    [ (with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ]) ];
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ])
+  ];
   services.udev.packages = [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
-  virtualisation.docker.enable = true;
 
   #RBIS Ports
+  virtualisation.docker.enable = true;
   networking.firewall.allowedTCPPorts = [ 1988 ];
   networking.firewall.allowedUDPPorts = [ 1988 ];
 }

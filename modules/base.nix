@@ -133,6 +133,7 @@
     nettools
     git
     vim
+    timg
     wl-clipboard
     obsidian
     python313

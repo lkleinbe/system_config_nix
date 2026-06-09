@@ -12,7 +12,7 @@
     ../modules/performance_governor.nix
   ];
   networking.hostName = "dumba-nuc2";
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # NOTE: Uncomment this if you want to use secure boot
   # lanzaboote will automatically enroll the keys
@@ -57,9 +57,9 @@
 
   # system packages
   environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
-  virtualisation.docker.enable = true;
 
-  #RBIS Ports
+  #RBIS
+  virtualisation.docker.enable = true;
   networking.firewall.allowedTCPPorts = [ 1988 ];
   networking.firewall.allowedUDPPorts = [ 1988 ];
 }

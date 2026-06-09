@@ -12,7 +12,7 @@
     ../modules/performance_governor.nix
   ];
   networking.hostName = "dumba-nuc1";
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # NOTE: Uncomment this if you want to use secure boot
   # lanzaboote will automatically enroll the keys
@@ -34,6 +34,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "usb"
     ];
     # user packages
     packages = with pkgs; [
@@ -56,10 +57,25 @@
   '';
 
   # system packages
-  environment.systemPackages = lib.mkMerge [ (with pkgs; [ uhd ]) ];
-  virtualisation.docker.enable = true;
+  environment.systemPackages = lib.mkMerge [
+    (with pkgs; [
+      uhd
+      hid-tools
+      hidapi
+    ])
+  ];
 
   #RBIS Ports
+  virtualisation.docker.enable = true;
   networking.firewall.allowedTCPPorts = [ 1988 ];
   networking.firewall.allowedUDPPorts = [ 1988 ];
+
+  # Leo bodnar GPSDO
+  users.groups.usb = { };
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1dd2", ATTRS{idProduct}=="2210", GROUP="usb"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1dd2", ATTRS{idProduct}=="2211", GROUP="usb"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1dd2", ATTRS{idProduct}=="2443", GROUP="usb"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="1dd2", ATTRS{idProduct}=="2444", GROUP="usb"
+  '';
 }

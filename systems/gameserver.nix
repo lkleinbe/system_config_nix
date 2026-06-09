@@ -11,7 +11,7 @@
     ../modules/dconf/dconf_desktop1.nix
   ];
   networking.hostName = "gameserver";
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # NOTE: Uncomment this if you want to use secure boot
   # lanzaboote will automatically enroll the keys
