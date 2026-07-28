@@ -4,6 +4,7 @@
     enable = true;
     settings.show_guides = true;
     settings.layout.min_width = 20;
+    settings.attach_mode = "global";
   };
   programs.nixvim.keymaps = [
     {
