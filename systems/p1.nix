@@ -2,12 +2,11 @@
   config,
   pkgs,
   lib,
-  antsdr-uhd,
   ...
 }:
 {
   imports = [
-    ../hardware/hardware-configuration_laptop.nix
+    ../hardware/hardware-configuration_p1.nix
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
   ];
@@ -54,18 +53,17 @@
     prime = {
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
+      # use either offload or sync
+      # offload: Intel GPU handles everything except stuff offloaded to nvidia gpu with prime-run
+      # sync: nvidia GPU handles everything. increased power consumption
+      # sync.enable = true; # use either offload or sync
       offload = {
-        # use either offload or sync
-        enable = true;
+        enable = true; # use either offload or sync
         enableOffloadCmd = true;
       };
-      # sync.enable = true; # use either offload or sync
     };
   };
   services.switcherooControl.enable = true; # gnome context menu switch for nvidia gpu
-  boot.kernelParams = [
-    "i915.fastboot=1"
-  ];
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
@@ -82,6 +80,10 @@
     Host gitlab.com
     User git
     IdentityFile /home/dumba/.ssh/id_ed25519
+
+    Host dumba-*
+    AddKeysToAgent yes
+    ForwardAgent yes
   '';
 
   programs.nix-ld.enable = true;
@@ -96,10 +98,9 @@
       # bitwarden-desktop
       adwaita-icon-theme
       usbutils
-      antsdr-uhd.packages.${pkgs.stdenv.hostPlatform.system}.antsdr-uhd
     ])
   ];
 
-  services.udev.packages = [ antsdr-uhd.packages.${pkgs.stdenv.hostPlatform.system}.antsdr-uhd ];
+  # services.udev.packages = [ antsdr-uhd.packages.${pkgs.stdenv.hostPlatform.system}.antsdr-uhd ];
   services.tlp.settings.USB_AUTOSUSPEND = 0;
 }

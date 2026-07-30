@@ -1,4 +1,11 @@
-{ pkgs, lib, inputs, nixvim, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  nixvim,
+  ...
+}:
+{
   imports = [
     # Plugins
     ./nixvim_plugins/gitsigns.nix
@@ -37,7 +44,7 @@
     ./nixvim_plugins/custom/plugins/tmux-navigator.nix
     ./nixvim_plugins/custom/plugins/lualine.nix
     ./nixvim_plugins/custom/plugins/zen-mode.nix
-    ./nixvim_plugins/custom/plugins/trouble.nix
+    ./nixvim_plugins/custom/plugins/aerial.nix
   ];
 
   programs.nixvim = {
@@ -53,7 +60,10 @@
       style = "darker";
       # transparent = true;
       # lualine.transparent = true;
-      toggle_style_list = [ "light" "darker" ];
+      toggle_style_list = [
+        "light"
+        "darker"
+      ];
       toggle_style_key = "<leader>lm";
     };
     clipboard = {
@@ -171,7 +181,9 @@
         mode = "t";
         key = "<Esc><Esc>";
         action = "<C-\\><C-n>";
-        options = { desc = "Exit terminal mode"; };
+        options = {
+          desc = "Exit terminal mode";
+        };
       }
       # TIP: Disable arrow keys in normal mode
       {
@@ -211,21 +223,30 @@
         options.desc = "Move to last character in line";
       }
       {
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         key = "<S-j>";
         action = "<C-f>";
         options.desc = "Move one screen down";
         options.noremap = true;
       }
       {
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         key = "<S-k>";
         action = "<C-b>";
         options.desc = "Move one screen up";
         options.noremap = true;
       }
       {
-        mode = [ "n" "v" ];
+        mode = [
+          "n"
+          "v"
+        ];
         key = "<C-j>";
         action = "J";
         options.desc = "Join lines";
@@ -234,7 +255,11 @@
     ];
 
     # https://nix-community.github.io/nixvim/NeovimOptions/autoGroups/index.html
-    autoGroups = { kickstart-highlight-yank = { clear = true; }; };
+    autoGroups = {
+      kickstart-highlight-yank = {
+        clear = true;
+      };
+    };
 
     # [[ Basic Autocommands ]]
     #  See `:help lua-guide-autocommands`

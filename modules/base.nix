@@ -1,4 +1,10 @@
-{ pkgs, nixvim, lib, ... }: {
+{
+  pkgs,
+  nixvim,
+  lib,
+  ...
+}:
+{
   imports = [
     # /etc/nixos/hardware-configuration.nix
     ./nixvim.nix
@@ -9,7 +15,10 @@
 
   #just trying suda-vim
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.gc = {
     automatic = true;
     persistent = true;
@@ -36,8 +45,10 @@
   # Systemd-resolved for dns resolution
   services.resolved = {
     enable = true;
-    llmnr = "true";
-    extraConfig = "MulticastDNS=no";
+    settings.Resolve.LLMNR = "true";
+    settings.Resolve.MulticastDNS = "no";
+    # llmnr = "true";
+    # extraConfig = "MulticastDNS=no";
   };
 
   # Avahi for local domain resolution and printers
@@ -131,6 +142,8 @@
     nettools
     git
     vim
+    timg
+    pciutils
     wl-clipboard
     obsidian
     python313
