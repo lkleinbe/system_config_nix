@@ -11,7 +11,7 @@
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
       # url = "github:nix-community/nixvim/nixos-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     antsdr-uhd = {
@@ -84,18 +84,18 @@
             ./systems/kulli.nix
           ];
         };
+        # dumba-laptop = inputs.nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
+        #   specialArgs = {
+        #     antsdr-uhd = antsdr-uhd;
+        #   };
+        #   modules = [
+        #     nixvim.nixosModules.nixvim
+        #     lanzaboote.nixosModules.lanzaboote
+        #     ./systems/laptop.nix
+        #   ];
+        # };
         dumba-laptop = inputs.nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            antsdr-uhd = antsdr-uhd;
-          };
-          modules = [
-            nixvim.nixosModules.nixvim
-            lanzaboote.nixosModules.lanzaboote
-            ./systems/laptop.nix
-          ];
-        };
-        dumba-p1 = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             antsdr-uhd = antsdr-uhd;

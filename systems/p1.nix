@@ -10,7 +10,7 @@
     ../modules/base.nix
     ../modules/dconf/dconf_desktop1.nix
   ];
-  networking.hostName = "dumba-p1";
+  networking.hostName = "dumba-laptop";
   system.stateVersion = "26.05";
 
   # NOTE: Uncomment this if you want to use secure boot
@@ -80,6 +80,10 @@
     Host gitlab.com
     User git
     IdentityFile /home/dumba/.ssh/id_ed25519
+
+    Host dumba-*
+    AddKeysToAgent yes
+    ForwardAgent yes
   '';
 
   programs.nix-ld.enable = true;

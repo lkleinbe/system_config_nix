@@ -63,6 +63,9 @@
     };
   };
   services.switcherooControl.enable = true; # gnome context menu switch for nvidia gpu
+  boot.kernelParams = [
+    "i915.fastboot=1"
+  ];
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication

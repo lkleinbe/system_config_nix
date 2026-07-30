@@ -22,4 +22,6 @@ cursor-style-blink = false
 shell-integration = detect
 shell-integration-features = ssh-env
 
+app-notifications=no-clipboard-copy
+
 custom-shader = shaders/cursor_warp.glsl
