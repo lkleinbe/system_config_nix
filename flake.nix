@@ -67,9 +67,9 @@
         };
         dumba-nuc3 = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            antsdr-uhd = inputs.antsdr-uhd;
-          };
+          # specialArgs = {
+          #   antsdr-uhd = inputs.antsdr-uhd;
+          # };
           modules = [
             nixvim.nixosModules.nixvim
             lanzaboote.nixosModules.lanzaboote
