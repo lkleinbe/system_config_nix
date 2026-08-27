@@ -61,6 +61,12 @@
 
   #RBIS
   virtualisation.docker.enable = true;
-  networking.firewall.allowedTCPPorts = [ 1988 ];
-  networking.firewall.allowedUDPPorts = [ 1988 ];
+  networking.firewall.allowedTCPPorts = [
+    1988
+    1883
+  ];
+  networking.firewall.allowedUDPPorts = [
+    1988
+    1883
+  ];
 }
