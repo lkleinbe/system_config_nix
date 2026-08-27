@@ -85,11 +85,9 @@
       discord
       gnuradio
       spotify
-      bitwarden-desktop
       beancount
       fava
       beanquery
-      beanhub-cli
       # htop
     ])
   ];

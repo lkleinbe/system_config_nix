@@ -45,7 +45,7 @@
       #  thunderbird
     ];
     openssh.authorizedKeys.keyFiles = [
-      ../public_ssh_keys/home_pc_ssh.pub
+      ../public_ssh_keys/home_dualboot_ssh.pub
       ../public_ssh_keys/home_windows_ssh.pub
     ];
   };

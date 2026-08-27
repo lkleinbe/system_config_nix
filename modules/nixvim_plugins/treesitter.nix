@@ -5,6 +5,12 @@
     # https://nix-community.github.io/nixvim/plugins/treesitter/index.html
     plugins.treesitter = {
       enable = true;
+      highlight = {
+        enable = true;
+        disable = [ "csv" ];
+        # Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+        # additional_vim_regex_highlighting = true;
+      };
       settings = {
         # TODO: Don't think I need this as nixGrammars is true which should auto install these???
         grammarPackages = with config.plugins.treesitter.package.builtGrammars; [
@@ -25,12 +31,6 @@
 
         ];
 
-        highlight = {
-          enable = true;
-          disable = [ "csv" ];
-          # Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-          # additional_vim_regex_highlighting = true;
-        };
         indent.enable = true;
         # indent = {
         #   enable = true;
