@@ -12,6 +12,7 @@
       nixfmt
       rustfmt
       cmake-format
+      tex-fmt
     ];
 
     # Autoformat
@@ -36,10 +37,14 @@
           lua = [ "stylua" ];
           cpp = [ "clang_format" ];
           # Conform can also run multiple formatters sequentially
-          python = [ "isort" "black" ];
+          python = [
+            "isort"
+            "black"
+          ];
           nix = [ "nixfmt" ];
           rust = [ "rustfmt" ];
-          tex = [ "latexindent" ];
+          # tex = [ "latexindent" ];
+          tex = [ "tex-fmt" ];
           beancount = [ "bean-format" ];
           cmake = [ "cmake-format" ];
           #
@@ -47,20 +52,25 @@
           # is found
           # javascript = [ [ "prettierd" "prettier" ] ];
         };
-        formatters.latexindent.prepend_args = [ "-m" ];
+        formatters.tex-fmt.prepend_args = [ "--nowrap" ];
+        # formatters.latexindent.prepend_args = [ "-m" ];
       };
     };
 
     # https://nix-community.github.io/nixvim/keymaps/index.html
-    keymaps = [{
-      mode = "";
-      key = "<leader>f";
-      action.__raw = ''
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end
-      '';
-      options = { desc = "[F]ormat buffer"; };
-    }];
+    keymaps = [
+      {
+        mode = "";
+        key = "<leader>f";
+        action.__raw = ''
+          function()
+            require('conform').format { async = true, lsp_fallback = true }
+          end
+        '';
+        options = {
+          desc = "[F]ormat buffer";
+        };
+      }
+    ];
   };
 }

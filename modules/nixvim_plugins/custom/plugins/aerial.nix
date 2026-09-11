@@ -1,4 +1,4 @@
-# Plugin to generate documentations as annotations. Use :Neogen
+# Plugin to show file outline/overview on the right
 {
   programs.nixvim.plugins.aerial = {
     enable = true;

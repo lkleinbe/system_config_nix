@@ -47,7 +47,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
+    # powerManagement.finegrained = true;
     open = true;
     nvidiaSettings = true;
     prime = {
@@ -64,6 +64,9 @@
     };
   };
   services.switcherooControl.enable = true; # gnome context menu switch for nvidia gpu
+  boot.kernelParams = [
+    "i915.enable_psr=0"
+  ];
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
@@ -98,6 +101,7 @@
       # bitwarden-desktop
       adwaita-icon-theme
       usbutils
+      libqalculate
     ])
   ];
 

@@ -154,7 +154,7 @@
       scrolloff = 5;
       shiftwidth = 2;
       tabstop = 2;
-      expandtab = true;
+      expandtab = true; # insert tabs instead of spaces
       # See `:help hlsearch`
       hlsearch = true;
 
@@ -278,6 +278,22 @@
           end
         '';
       }
+      {
+        event = "OptionSet";
+        pattern = "background";
+        callback.__raw = ''
+          function()
+            vim.schedule(function()
+              local style = vim.o.background == "light" and "light" or "darker"
+              require("onedark").setup({ style = style })
+              require("onedark").load()
+              vim.schedule(function()
+                require("lualine").refresh()
+              end)
+            end)
+          end
+        '';
+      }
     ];
 
     nixpkgs.config.allowUnfree = true;
@@ -288,6 +304,7 @@
       # Detect tabstop and shiftwidth automatically
       # https://nix-community.github.io/nixvim/plugins/sleuth/index.html
       # sleuth.enable = true;
+      guess-indent.enable = true;
       claude-code.enable = true;
       vim-suda.enable = true;
       cmake-tools = {
@@ -319,12 +336,6 @@
           vim.opt.runtimepath:prepend(grammar)
         end
       end
-    '';
-
-    # The line beneath this is called `modeline`. See `:help modeline`
-    # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraconfigluapost
-    extraConfigLuaPost = ''
-      -- vim: ts=2 sts=2 sw=2 et
     '';
   };
 }

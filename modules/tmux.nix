@@ -1,45 +1,52 @@
-{ pkgs, inputs, lib, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
-  is_vim = pkgs.writeShellScriptBin "is_vim.sh"
-    # bash
-    ''
-      pane_pid=$(tmux display -p "#{pane_pid}")
+  is_vim =
+    pkgs.writeShellScriptBin "is_vim.sh"
+      # bash
+      ''
+        pane_pid=$(tmux display -p "#{pane_pid}")
 
-      [ -z "$pane_pid" ] && exit 1
+        [ -z "$pane_pid" ] && exit 1
 
-      # Retrieve all descendant processes of the tmux pane's shell by iterating through the process tree.
-      # This includes child processes and their descendants recursively.
-      descendants=$(ps -eo pid=,ppid=,stat= | awk -v pid="$pane_pid" '{
-          if ($3 !~ /^T/) {
-              pid_array[$1]=$2
-          }
-      } END {
-          for (p in pid_array) {
-              current_pid = p
-              while (current_pid != "" && current_pid != "0") {
-                  if (current_pid == pid) {
-                      print p
-                      break
-                  }
-                  current_pid = pid_array[current_pid]
-              }
-          }
-      }')
+        # Retrieve all descendant processes of the tmux pane's shell by iterating through the process tree.
+        # This includes child processes and their descendants recursively.
+        descendants=$(ps -eo pid=,ppid=,stat= | awk -v pid="$pane_pid" '{
+            if ($3 !~ /^T/) {
+                pid_array[$1]=$2
+            }
+        } END {
+            for (p in pid_array) {
+                current_pid = p
+                while (current_pid != "" && current_pid != "0") {
+                    if (current_pid == pid) {
+                        print p
+                        break
+                    }
+                    current_pid = pid_array[current_pid]
+                }
+            }
+        }')
 
-      if [ -n "$descendants" ]; then
+        if [ -n "$descendants" ]; then
 
-          descendant_pids=$(echo "$descendants" | tr '\n' ',' | sed 's/,$//')
+            descendant_pids=$(echo "$descendants" | tr '\n' ',' | sed 's/,$//')
 
-          ps -o args= -p "$descendant_pids" | grep -iqE "(^|/)([gn]?vim?x?)(diff)?"
+            ps -o args= -p "$descendant_pids" | grep -iqE "(^|/)([gn]?vim?x?)(diff)?"
 
-          if [ $? -eq 0 ]; then
-              exit 0
-          fi
-      fi
+            if [ $? -eq 0 ]; then
+                exit 0
+            fi
+        fi
 
-      exit 1
-    '';
-in {
+        exit 1
+      '';
+in
+{
   programs.tmux = {
     enable = true;
     shortcut = "Space";
@@ -124,7 +131,7 @@ in {
       # set -g status-justify left
       # set -g status-style 'fg=colour0 dim'
       set -g status-left '''
-      set -g status-right '%Y-%m-%d %H:%M | #{pomodoro_status} |#(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) '
+      set -g status-right '%Y-%m-%d %H:%M | #(tomat status --output plain --format "{phase}: {time}" 2>/dev/null)'
       # set -g status-right-length 50
       # set -g status-left-length 10
       set -g status-interval 1

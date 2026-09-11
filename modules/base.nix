@@ -151,16 +151,16 @@
     gnomeExtensions.media-controls
     gnomeExtensions.dash-to-panel
     gnomeExtensions.arc-menu
-    gnome-pomodoro
     zathura
     vscode-extensions.vadimcn.vscode-lldb
     claude-code
-    gemini-cli
     texliveFull
     uv
     arxiv-latex-cleaner
     adwaita-icon-theme
     hicolor-icon-theme
+    tomat
+    bibtex-tidy
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
@@ -189,6 +189,9 @@
   # Allow passwordless sudo if connected via ssh and agent is forwarded
   security.pam.sshAgentAuth.enable = true;
   security.pam.services.sudo.sshAgentAuth = true;
+  security.sudo.extraConfig = ''
+    Defaults env_keep += "TMUX"
+  '';
 
   xdg.mime.defaultApplications = {
     "text/plain" = "org.gnome.TextEditor.desktop";
