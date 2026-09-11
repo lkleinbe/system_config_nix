@@ -161,6 +161,9 @@
     hicolor-icon-theme
     tomat
     bibtex-tidy
+    clang-uml
+    plantuml
+    graphviz
   ];
   programs.direnv.enable = true;
   programs.firefox.enable = true;
