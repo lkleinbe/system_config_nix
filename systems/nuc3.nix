@@ -38,8 +38,6 @@
     # user packages
     # packages = with pkgs; [ antsdr-uhd.packages.${pkgs.system}.antsdr-uhd ];
     openssh.authorizedKeys.keyFiles = [
-      ../public_ssh_keys/work_windows_ssh.pub
-      ../public_ssh_keys/work_nixos_ssh.pub
       ../public_ssh_keys/work_p1_ssh.pub
       ../public_ssh_keys/home_dualboot_ssh.pub
     ];
