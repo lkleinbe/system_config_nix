@@ -147,10 +147,8 @@
     wl-clipboard
     obsidian
     python313
-    gnomeExtensions.open-bar
-    gnomeExtensions.media-controls
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.arc-menu
+    # gnomeExtensions.dash-to-panel
+    # gnomeExtensions.arc-menu
     zathura
     vscode-extensions.vadimcn.vscode-lldb
     claude-code
