@@ -28,6 +28,9 @@
     autoEnrollKeys.autoReboot = true;
   };
 
+  boot.kernelModules = [ "nct6687" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.nct6687d ];
+
   #User Configuration
   users.users.dumba = {
     isNormalUser = true;
@@ -77,6 +80,14 @@
   virtualisation.docker.enable = true;
   programs.nix-ld.enable = true;
   hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  programs.coolercontrol.enable = true;
 
   # system packages
   environment.systemPackages = lib.mkMerge [
@@ -91,5 +102,10 @@
       # htop
     ])
   ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 
 }

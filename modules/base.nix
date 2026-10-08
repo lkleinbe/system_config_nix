@@ -33,7 +33,7 @@
   boot.loader.systemd-boot.enable = lib.mkDefault true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
     "intel_pstate=enable" # intel pstate driver to change gpu frequency
     "intel_idle_max_cstate=1" # intel

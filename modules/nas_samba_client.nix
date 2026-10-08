@@ -1,4 +1,10 @@
-{ pkgs, inputs, lib, ... }: {
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
 
   # This allows SUID for mount-cifs. This is required, so that nautilus can mount the shares, when requested
   security.wrappers.mount-cifs = {
@@ -10,7 +16,7 @@
   };
   # The Credentions are stored in secrets/smb. You need to create that file to store the credentials
   fileSystems."/mnt/backup_share" = {
-    device = "//192.168.2.254/backup_share";
+    device = "//192.168.0.254/backup_share";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
@@ -31,7 +37,7 @@
     ];
   };
   fileSystems."/mnt/jonas_share" = {
-    device = "//192.168.2.254/jonas_share";
+    device = "//192.168.0.254/jonas_share";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
@@ -52,7 +58,7 @@
     ];
   };
   fileSystems."/mnt/kleinberger_share" = {
-    device = "//192.168.2.254/kleinberger_share";
+    device = "//192.168.0.254/kleinberger_share";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
@@ -73,7 +79,7 @@
     ];
   };
   fileSystems."/mnt/leonard_share" = {
-    device = "//192.168.2.254/leonard_share";
+    device = "//192.168.0.254/leonard_share";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
@@ -94,7 +100,7 @@
     ];
   };
   fileSystems."/mnt/public_share" = {
-    device = "//192.168.2.254/public_share";
+    device = "//192.168.0.254/public_share";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
