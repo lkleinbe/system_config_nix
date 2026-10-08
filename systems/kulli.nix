@@ -27,6 +27,12 @@
     autoEnrollKeys.enable = true;
     autoEnrollKeys.autoReboot = true;
   };
+  boot.kernelModules = [
+    "coretemp"
+    "it87"
+  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ it87 ];
+  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
 
   i18n.defaultLocale = "de_DE.UTF-8";
 
@@ -83,6 +89,7 @@
       cifs-utils
     ])
   ];
+  programs.coolercontrol.enable = true;
   programs.thunderbird = {
     enable = true;
   };
@@ -94,6 +101,12 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
   };
 
   xdg.mime.defaultApplications = {
