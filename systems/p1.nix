@@ -65,8 +65,12 @@
   };
   services.switcherooControl.enable = true; # gnome context menu switch for nvidia gpu
   boot.kernelParams = [
-    "i915.enable_psr=0"
+    "i915.force_probe=!7d51"
+    "xe.force_probe=7d51"
+    "drm.fbdev_emulation=0"
+    "drm_kms_helper.fbdev_emulation=0"
   ];
+  boot.initrd.kernelModules = [ "xe" ];
 
   # services.openssh.settings.PasswordAuthentication =
   #   true; # NOTE uncomment this to allow SSH Password authentication
@@ -102,6 +106,7 @@
       adwaita-icon-theme
       usbutils
       libqalculate
+      zotero
     ])
   ];
 

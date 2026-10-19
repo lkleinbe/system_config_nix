@@ -307,12 +307,6 @@
       guess-indent.enable = true;
       claude-code.enable = true;
       vim-suda.enable = true;
-      cmake-tools = {
-        enable = true;
-        settings = {
-          # cmake_executor.
-        };
-      };
     };
 
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=extraplugins#extraplugins
