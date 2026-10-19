@@ -63,7 +63,10 @@
   #printing setup
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint ];
+    drivers = [
+      pkgs.epson-escpr2
+      pkgs.gutenprint
+    ];
   };
   #TODO: i should not need this anymore
   services.avahi = {
