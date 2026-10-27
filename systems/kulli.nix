@@ -110,6 +110,7 @@
     modesetting.enable = true;
     open = true;
     nvidiaSettings = true;
+    powerManagement.enable = true;
   };
 
   xdg.mime.defaultApplications = {
@@ -117,5 +118,16 @@
     "message/rfc822" = "userapp-Thunderbird-ESWFE3.desktop";
     "x-scheme-handler/mid" = "userapp-Thunderbird-ESWFE3.desktop";
     "application/pdf" = "org.gnome.Papers.desktop";
+  };
+  services.triggerhappy = {
+    enable = true;
+    user = "root";
+    bindings = [
+      {
+        keys = [ "POWER" ];
+        event = "press";
+        cmd = "${pkgs.systemd}/bin/systemctl poweroff";
+      }
+    ];
   };
 }

@@ -23,6 +23,15 @@
   };
   programs.dconf = {
     enable = true;
+    profiles.gdm.databases = [
+      {
+        settings = {
+          "org/gnome/settings-daemon/plugins/power" = {
+            "power-button-action" = "interactive";
+          };
+        };
+      }
+    ];
     profiles.user.databases = [
       {
         settings = {
