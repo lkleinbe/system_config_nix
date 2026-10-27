@@ -90,6 +90,8 @@
     (with pkgs; [
       libreoffice
       cifs-utils
+      hunspell
+      hyphenDicts.de_DE
     ])
   ];
   programs.coolercontrol.enable = true;
