@@ -47,7 +47,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    # powerManagement.finegrained = true;
+    powerManagement.finegrained = true;
     open = true;
     nvidiaSettings = true;
     prime = {
@@ -94,6 +94,7 @@
   '';
 
   programs.nix-ld.enable = true;
+  programs.thunderbird.enable = true;
   virtualisation.docker.enable = true;
 
   # system packages
@@ -107,6 +108,7 @@
       usbutils
       libqalculate
       zotero
+      teams-for-linux
     ])
   ];
 

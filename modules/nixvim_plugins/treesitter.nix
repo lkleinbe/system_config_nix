@@ -7,7 +7,10 @@
       enable = true;
       highlight = {
         enable = true;
-        disable = [ "csv" ];
+        disable = [
+          "csv"
+          "tex"
+        ];
         # Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         # additional_vim_regex_highlighting = true;
       };
@@ -34,9 +37,6 @@
         indent.enable = true;
         # indent = {
         #   enable = true;
-        #   disable = [
-        #     "ruby"
-        #   ];
         # };
 
         # There are additional nvim-treesitter modules that you can use to interact
