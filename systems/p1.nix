@@ -114,4 +114,10 @@
 
   # services.udev.packages = [ antsdr-uhd.packages.${pkgs.stdenv.hostPlatform.system}.antsdr-uhd ];
   services.tlp.settings.USB_AUTOSUSPEND = 0;
+  networking.firewall.allowedTCPPorts = [
+    465
+  ];
+  networking.firewall.allowedUDPPorts = [
+    465
+  ];
 }

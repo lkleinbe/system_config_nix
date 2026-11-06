@@ -230,7 +230,6 @@
         key = "<S-j>";
         action = "<C-f>";
         options.desc = "Move one screen down";
-        options.noremap = true;
       }
       {
         mode = [
@@ -240,7 +239,6 @@
         key = "<S-k>";
         action = "<C-b>";
         options.desc = "Move one screen up";
-        options.noremap = true;
       }
       {
         mode = [
@@ -251,6 +249,30 @@
         action = "J";
         options.desc = "Join lines";
         options.noremap = true;
+      }
+      {
+        mode = "n";
+        key = "<C-f>";
+        action.__raw = ''
+          function()
+            vim.wo.scroll = vim.api.nvim_win_get_height(0)
+            vim.cmd("normal! \x04")
+            vim.wo.scroll = 0
+          end
+        '';
+        options.desc = "Scroll page down (cursor-fixed)";
+      }
+      {
+        mode = "n";
+        key = "<C-b>";
+        action.__raw = ''
+          function()
+            vim.wo.scroll = vim.api.nvim_win_get_height(0)
+            vim.cmd("normal! \x15")
+            vim.wo.scroll = 0
+          end
+        '';
+        options.desc = "Scroll page up (cursor-fixed)";
       }
     ];
 
