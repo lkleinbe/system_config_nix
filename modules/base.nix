@@ -143,6 +143,7 @@
     git
     vim
     timg
+    lshw
     pciutils
     wl-clipboard
     obsidian

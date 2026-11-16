@@ -58,8 +58,7 @@
     colorschemes.onedark.enable = true;
     colorschemes.onedark.settings = {
       style = "darker";
-      # transparent = true;
-      # lualine.transparent = true;
+      colors.fg = "#b8c0cf";
       toggle_style_list = [
         "light"
         "darker"
@@ -306,8 +305,11 @@
         callback.__raw = ''
           function()
             vim.schedule(function()
-              local style = vim.o.background == "light" and "light" or "darker"
-              require("onedark").setup({ style = style })
+              local is_light = vim.o.background == "light"
+              require("onedark").setup({
+                style = is_light and "light" or "darker",
+                colors = { fg = is_light and "#383a42" or "#b8c0cf" },
+              })
               require("onedark").load()
               vim.schedule(function()
                 require("lualine").refresh()
